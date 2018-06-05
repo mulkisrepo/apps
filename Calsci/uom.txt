@@ -1,0 +1,2021 @@
+//
+// Unit-of-Measure List
+//------------------------------------------------------------------------------
+// 27-Apr-09 I.Boys
+//           Version SC1#10.1.1 imported from UnitsOfMeasure (UOM2.3p) project
+//------------------------------------------------------------------------------
+// Column Description
+//    1   text string used for specifying units-of-measure.
+//    2   keyword-style text string used for specifying units-of-measure
+//        in keyword-based applications (such as PRO/II).
+//    3   long descriptive text
+//    4   if value is "1", then use the API style for specifying thousands/millions
+//        (for example MM BBL for millions of barrels).
+//        if value is "0", then use the SI style for specifying thousands/millions
+//        (for example M*M3 for millions of cubic meters).
+//    5   Addition constant
+//    6   Multiplication constant
+//
+//        The conversion constants are used as follows:
+//        temporary value = (value in specified uom + "addition constant") * "multiplication constant";
+//
+//        A conversion from one unit-of-measure to another is performed by
+//        first converting from the source unit-of-measure to the temporary
+//        value, and from there to the destination unit-of-measure.
+//
+//        For example, to convert from absolute pressure units of kPa to atm,
+//        read the multiplication constants from the table: 1000.0 for kPa and
+//        101325.0 for atm. Then, take the number you want to convert and
+//        multiply by 1000.0 then divide by 101325.
+//
+
+"BEGINUOMLIST"
+"",             "NULL",     "",                           0, 0.00000E+00, 1.00000E+00
+
+"K",            "K",        "Kelvin",                     0, 0.00000E+00, 1.80000E+00
+"C",            "C",        "Celsius",                    0, 2.73150E+02, 1.80000E+00
+"R",            "R",        "Rankine",                    1, 0.00000E+00, 1.00000E+00
+"F",            "F",        "Fahrenheit",                 1, 4.59670E+02, 1.00000E+00
+
+"dyne/cm2",     "D/CM2",    "Dyne/centimeter^2",          0, 0.00000E+00, 1.00000E-01
+"N/m2",         "N/M2",     "Newton/meter^2",             0, 0.00000E+00, 1.00000E+00
+"Pa",           "PA",       "Pascal",                     0, 0.00000E+00, 1.00000E+00
+"kPa",          "KPA",      "Kilopascal",                 0, 0.00000E+00, 1.00000E+03
+"MPa",          "MPA",      "Megapascal",                 0, 0.00000E+00, 1.00000E+06
+"Pag",          "PAG",      "Pascal (gauge)",             0, 1.01325E+05, 1.00000E+00
+"kPag",         "KPAG",     "Kilopascal (gauge)",         0, 1.01325E+02, 1.00000E+03
+"MPag",         "MPAG",     "Megapascal (gauge)",         0, 1.01325E-01, 1.00000E+06
+"mbar",         "MBAR",     "millibar (abs)",             0, 0.00000E+00, 1.00000E+02
+"bar",          "BAR",      "Bar (abs)",                  0, 0.00000E+00, 1.00000E+05
+"mbarg",        "MBARG",    "millibar (gauge)",           0, 1.01325E+03, 1.00000E+02
+"barg",         "BARG",     "Bar (gauge)",                0, 1.01325E+00, 1.00000E+05
+"in Hg",        "INHG",     "Inches of mercury",          0, 0.00000E+00, 3.38639E+03
+"mm Hg",        "MMHG",     "Millimeters of mercury",     0, 0.00000E+00, 1.33322368421E+02
+"mm Hg@0C",     "MMHG0C",   "mm of mercury at 0C",        0, 0.00000E+00, 1.33323E+02
+"in Hg@60F",    "INHG60F",  "Inches of mercury at 60F",   0, 0.00000E+00, 3.37700E+03
+"in Hg@32F",    "INHG32F",  "Inches of mercury at 32F",   0, 0.00000E+00, 3.38641E+03
+"in Hgg",       "INHGG",    "Inches of mercury (gauge)",  0, 2.99212598425E+01, 3.38639E+03
+"mm Hgg",       "MMHGG",    "Millimeters of mercury (gauge)", 0, 7.60E+02, 1.33322368421E+02
+"torr",         "TORR",     "Torr",                       0, 0.00000E+00, 1.33322368421E+02
+"kg/cm2",       "KGCM",     "Kilogram/centimeter^2",      0, 0.00000E+00, 9.80665E+04
+"kg/cm2g",      "KG/CM2G",  "Kilogram/centimeter^2 (gauge)",  0,  1.03323E+00,  9.80665E+04 
+"ata",          "ATA",      "Technical atm (abs)",        1, 0.00000E+00, 9.80665E+04
+"ate",          "ATE",      "Technical atm (gauge)",      1, 1.03323E+00, 9.80665E+04
+"atm",          "ATM",      "Atmosphere",                 1, 0.00000E+00, 1.01325E+05
+"psia",         "PSIA",     "Pound/inch^2 (abs)",         1, 0.00000E+00, 6.89476E+03
+"psig",         "PSIG",     "Pound/inch^2 (gauge)",       1, 1.46959E+01, 6.89476E+03
+"psi",          "PSI",      "Pound/inch^2",               1, 0.00000E+00, 6.89476E+03
+"psf",          "PSF",      "Pound/foot^2",               1, 0.00000E+00, 4.78803E+01
+"in H2O",       "INH2O",    "Inches of water",            1, 0.00000E+00, 2.48843E+02
+"in H2Og",      "INH2OG",   "Inches of water (gauge)",    1, 4.07184450E+02, 2.48843E+02
+"mm H2O",       "MMH2O",    "Millimeters of water",       0, 0.00000E+00, 9.79698E+00
+"mm H2Og",      "MMH2OG",   "Millimeters of water (gauge)"0, 1.0342472885E+04, 9.79698E+00
+"cm H2O",       "CMH2O",    "Centimeters of water",       1, 0.00000E+00, 9.79698E+01
+"ft H2O",       "FTH2O",    "Feet of water",              1, 0.00000E+00, 2.98611E+03
+"ft H2Og",      "FTH2OG",   "Feet of water (gauge)",      1, 3.3932106E+01, 2.98611E+03
+"in H2O@60F",   "INH2O60F", "Inches of water at 60F",     1, 0.00000E+00, 2.48800E+02
+"in H2O@39.2F", "INH2O39F", "Inches of water at 39.2F",   1, 0.00000E+00, 2.49082E+02
+"cm H2O@4C",    "CMH2O4C",  "Centimeters of water at 4C", 1, 0.00000E+00, 9.80642E+01
+
+"sec",          "SEC",      "Second",                     0, 0.00000E+00, 1.00000E+00
+"min",          "MIN",      "Minute",                     0, 0.00000E+00, 6.00000E+01
+"hr",           "HR",       "Hour",                       0, 0.00000E+00, 3.60000E+03
+"day",          "DAY",      "Day",                        0, 0.00000E+00, 8.64000E+04
+"wk",           "WK",       "Week",                       0, 0.00000E+00, 6.04800E+05
+"mon",          "MON",      "Month",                      0, 0.00000E+00, 2.59200E+06
+"yr",           "YR",       "Year",                       0, 0.00000E+00, 3.15576E+07
+
+"ang",          "ANG",      "Angstrom",                   0, 0.00000E+00, 1.00000E-08
+"mmic",         "MMIC",     "Millimicron",                0, 0.00000E+00, 1.00000E-07
+"mic",          "MIC",      "Micron",                     0, 0.00000E+00, 1.00000E-04
+"mm",           "MM",       "Millimeter",                 0, 0.00000E+00, 1.00000E-01
+"cm",           "CM",       "Centimeter",                 0, 0.00000E+00, 1.00000E+00
+"dm",           "DM",       "Decimeter",                  0, 0.00000E+00, 1.00000E+01
+"m",            "M",        "Meter",                      0, 0.00000E+00, 1.00000E+02
+"km",           "KM",       "Kilometer",                  0, 0.00000E+00, 1.00000E+05
+"in",           "IN",       "Inch",                       1, 0.00000E+00, 2.54000E+00
+"ft",           "FT",       "Foot",                       1, 0.00000E+00, 3.04800E+01
+"yd",           "YD",       "Yard",                       1, 0.00000E+00, 9.14400E+01
+"mi",           "MI",       "Mile",                       1, 0.00000E+00, 1.60934E+05
+
+"ang2",         "ANG2",     "Angstrom^2",                 0, 0.00000E+00, 1.00000E-16
+"mmic2",        "MMIC2",    "Millimicron^2",              0, 0.00000E+00, 1.00000E-14
+"mic2",         "MIC2",     "Micron^2",                   0, 0.00000E+00, 1.00000E-08
+"mm2",          "MM2",      "Millimeter^2",               0, 0.00000E+00, 1.00000E-02
+"cm2",          "CM2",      "Centimeter^2",               0, 0.00000E+00, 1.00000E+00
+"dm2",          "DM2",      "Decimeter^2",                0, 0.00000E+00, 1.00000E+02
+"m2",           "M2",       "Meter^2",                    0, 0.00000E+00, 1.00000E+04
+"km2",          "KM2",      "Kilometer^2",                0, 0.00000E+00, 1.00000E+10
+"in2",          "IN2",      "Inch^2",                     1, 0.00000E+00, 6.45160E+00
+"ft2",          "FT2",      "Foot^2",                     1, 0.00000E+00, 9.29030E+02
+"yd2",          "YD2",      "Yard^2",                     1, 0.00000E+00, 8.36127E+03
+"mi2",          "MI2",      "Mile^2",                     1, 0.00000E+00, 2.58999E+10
+"hect",         "HECT",     "Hectare",                    1, 0.00000E+00, 1.00000E+08
+"acre",         "ACRE",     "Acre",                       1, 0.00000E+00, 4.04686E+07
+
+"ang3",         "ANG3",     "Angstrom^3",                 0, 0.00000E+00, 1.00000E-24
+"mmic3",        "MMIC3",    "Millimicron^3",              0, 0.00000E+00, 1.00000E-21
+"mic3",         "MIC3",     "Micron^3",                   0, 0.00000E+00, 1.00000E-12
+"mm3",          "MM3",      "Millimeter^3",               0, 0.00000E+00, 1.00000E-03
+"cm3",          "CM3",      "Centimeter^3",               0, 0.00000E+00, 1.00000E+00
+"dm3",          "DM3",      "Decimeter^3",                0, 0.00000E+00, 1.00000E+03
+"m3",           "M3",       "Meter^3",                    0, 0.00000E+00, 1.00000E+06
+"km3",          "KM3",      "Kilometer^3",                0, 0.00000E+00, 1.00000E+15
+"in3",          "IN3",      "Inch^3",                     1, 0.00000E+00, 1.63871E+01
+"ft3",          "FT3",      "Foot^3",                     1, 0.00000E+00, 2.83169E+04
+"yd3",          "YD3",      "Yard^3",                     1, 0.00000E+00, 7.64555E+05
+"mi3",          "MI3",      "Mile^3",                     1, 0.00000E+00, 4.15419E+15
+"liter",        "LIT",      "Liter",                      0, 0.00000E+00, 1.00000E+03
+"gal",          "GAL",      "U.S. gallon",                1, 0.00000E+00, 3.78541E+03
+"igal",         "IGAL",     "Imperial gallon",            1, 0.00000E+00, 4.54609E+03
+"bbl",          "BBL",      "API barrel",                 1, 0.00000E+00, 1.58987E+05
+"Mbbl",         "MBBL",     "10^3 API barrels",           1, 0.00000E+00, 1.58987E+08
+"KL",           "KL",       "Kiloliter",                  0, 0.00000E+00, 1.00000E+06
+"Mft3",         "MFT3",     "10^3 Foot^3",                1, 0.00000E+00, 2.83169E+07
+"Mgal",         "MGAL",     "10^3 Gallon",                1, 0.00000E+00, 3.78541E+06
+"MMft3",        "MMFT3",    "10^6 Foot^3",                1, 0.00000E+00, 2.83169E+10
+"MMgal",        "MMGAL",    "10^6 Gallon",                1, 0.00000E+00, 3.78541E+09
+
+"g",            "G",        "Gram",                       0, 0.00000E+00, 1.00000E-03
+"kg",           "KG",       "Kilogram",                   0, 0.00000E+00, 1.00000E+00
+"tonm",         "TONM",     "Metric ton",                 0, 0.00000E+00, 1.00000E+03
+"oz",           "OZ",       "Ounce",                      1, 0.00000E+00, 2.83495E-02
+"lb",           "LB",       "Pound",                      1, 0.00000E+00, 4.53592E-01
+"klb",          "KLB",      "Kilopound",                  0, 0.00000E+00, 4.53592E+02
+"ton",          "ST",       "Short ton",                  1, 0.00000E+00, 9.07185E+02
+"tonl",         "TONL",     "Long ton",                   1, 0.00000E+00, 1.01605E+03
+"Ktonm",        "KTONM",    "10^3 Metric ton",            0, 0.00000E+00, 1.00000E+06
+
+"g-mol",        "G-MOL",    "Gram-mole",                  0, 0.00000E+00, 1.00000E-03
+"kg-mol",       "KG-MOL",   "Kilogram-mole",              0, 0.00000E+00, 1.00000E+00
+"tonm-mol",     "TONM-MOL", "Metric ton-mole",            0, 0.00000E+00, 1.00000E+03
+"oz-mol",       "OZ-MOL",   "Ounce-mole",                 1, 0.00000E+00, 2.83495E-02
+"lb-mol",       "LB-MOL",   "Pound-mole",                 1, 0.00000E+00, 4.53592E-01
+"ton-mol",      "TONS-MOL", "Short ton-mole",             1, 0.00000E+00, 9.07185E+02
+"tonl-mol",     "TONL-MOL", "Long ton-mole",              1, 0.00000E+00, 1.01605E+03
+"Ktonm-mol",    "KTM-MOL",  "10^3 Metric ton-mole",       0, 0.00000E+00, 1.00000E+06
+"nm3",          "NM3",      "Standard Cubic Meters",      0, 0.00000E+00, 4.4615423E-02
+"scf",          "SCF",      "Standard Cubic Feet"         0, 0.00000E+00, 1.1952452E-03
+
+"J",            "J",        "Joule",                      0, 0.00000E+00, 1.00000E+00
+"kJ",           "KJ",       "Kilojoule",                  0, 0.00000E+00, 1.00000E+03
+"MJ",           "MJ",       "Megajoule",                  0, 0.00000E+00, 1.00000E+06
+"cal",          "CAL",      "Calorie",                    0, 0.00000E+00, 4.18680E+00
+"kcal",         "KCAL",     "Kilocalorie",                0, 0.00000E+00, 4.18680E+03
+"g-cm",         "GCM",      "Gram-centimeter",            0, 0.00000E+00, 9.80665E-05
+"kg-m",         "KGM",      "Kilogram-meter",             0, 0.00000E+00, 9.80665E+00
+"ft-lb",        "FTLB",     "Foot-pound",                 1, 0.00000E+00, 1.35582E+00
+"BTU",          "BTU",      "British Thermal Unit",       1, 0.00000E+00, 1.05506E+03
+"CHU",          "CHU",      "Centigrade Heat Unit",       0, 0.00000E+00, 1.89910E+03
+"PCU",          "PCU",      "Pound Centigrade Unit",      0, 0.00000E+00, 1.89910E+03
+"kW-hr",        "KWH",      "Kilowatt-hour",              0, 0.00000E+00, 3.60000E+06
+
+"W",            "WATT",     "Watt",                       0, 0.00000E+00, 1.00000E+00
+"kW",           "KW",       "Kilowatt",                   0, 0.00000E+00, 1.00000E+03
+"MW",           "MW",       "Megawatt",                   0, 0.00000E+00, 1.00000E+06
+"VA",           "VA",       "Volt-Ampere",                0, 0.00000E+00, 1.00000E+00
+"KVA",          "kVA",     "Kilo Volt-Ampere",           0, 0.00000E+00, 1.00000E+03
+"MVA",          "mVA",     "Mega Volt-Ampere",           0, 0.00000E+00, 1.00000E+06
+"VAR",          "VAR",      "Volt-Ampere Reactive",       0, 0.00000E+00, 1.00000E+00
+"kVAR",         "KVAR",     "Kilo Volt-Ampere Reactive",  0, 0.00000E+00, 1.00000E+03
+"MVAR",         "MVAR",     "Mega Volt-Ampere Reactive",  0, 0.00000E+00, 1.00000E+06
+"HP",           "HP",       "Horsepower",                 1, 0.00000E+00, 7.45697E+02
+
+"H",            "H",        "Henry",                       0, 0.00000E+00, 1.00000E+00
+"mH",           "mH",       "MilliHenry",                0, 0.00000E+00, 1.00000E-03
+"muH",          "muH",      "MicroHenry",                 0, 0.00000E+00, 1.00000E-06
+
+"F",            "F",        "Farad",                       0, 0.00000E+00, 1.00000E+00
+"mF",           "mF",       "MilliFarad",                  0, 0.00000E+00, 1.00000E-03
+"muF",          "muF",      "MicroFarad",                  0, 0.00000E+00, 1.00000E-06
+
+"x 10^6 J",     "J",        "10^6 Joule",                 0, 0.00000E+00, 1.00000E+06
+"x 10^6 kJ",    "KJ",       "10^6 Kilojoule",             0, 0.00000E+00, 1.00000E+09
+"x 10^6 MJ",    "MJ",       "10^6 Megajoule",             0, 0.00000E+00, 1.00000E+12
+"x 10^6 cal",   "CAL",      "10^6 Calorie",               0, 0.00000E+00, 4.18680E+06
+"x 10^6 Kcal",  "KCAL",     "10^6 Kilocalorie",           0, 0.00000E+00, 4.18680E+09
+"x 10^6 gcm",   "GCM",      "10^6 Gram-centimeter",       0, 0.00000E+00, 9.80665E+01
+"x 10^6 kgm",   "KGM",      "10^6 Kilogram-meter",        0, 0.00000E+00, 9.80665E+06
+"x 10^6 ftlb",  "FTLB",     "10^6 Foot-pound",            1, 0.00000E+00, 1.35582E+06
+"x 10^6 BTU",   "BTU",      "10^6 BTU",                   1, 0.00000E+00, 1.05506E+09
+"x 10^6 CHU",   "CHU",      "10^6 CHU",                   0, 0.00000E+00, 1.89910E+09
+"x 10^6 PCU",   "PCU",      "10^6 PCU",                   0, 0.00000E+00, 1.89910E+09
+"x 10^6 KWH",   "KWH",      "10^6 Kilowatt-hour",         0, 0.00000E+00, 3.60000E+12
+"x 10^6 W",     "WATT",     "10^6 Watt",                  0, 0.00000E+00, 1.00000E+06
+"x 10^6 kW",    "KW",       "10^6 Kilowatt",              0, 0.00000E+00, 1.00000E+09
+"x 10^6 MW",    "MW",       "10^6 Megawatt",              0, 0.00000E+00, 1.00000E+12
+"x 10^6 VA",    "VA",       "10^6 Volt-Ampere",           0, 0.00000E+00, 1.00000E+06
+"x 10^6 VAR",   "VAR",      "10^6 Volt-Ampere Reactive",  0, 0.00000E+00, 1.00000E+06
+"x 10^6 HP",    "HP",       "10^6 Horsepower",            1, 0.00000E+00, 7.45697E+08
+
+"cP",           "CP",       "Centipoise",                 0, 0.00000E+00, 1.00000E+00
+"POIS",         "POIS",     "Poise",                      0, 0.00000E+00, 1.00000E+02
+"Pa-sec",       "PAS",      "Pascal-second",              0, 0.00000E+00, 1.00000E+03
+"kg/m-sec",     "K/MS",     "Kilogram/meter-second",      0, 0.00000E+00, 1.00000E+03
+"kg/m-min",     "K/MM",     "Kilogram/meter-minute",      0, 0.00000E+00, 1.66667E+01
+"kg/m-hr",      "K/MH",     "Kilogram/meter-hour",        0, 0.00000E+00, 2.77778E-01
+"kg/m-day",     "K/MD",     "Kilogram/meter-day",         0, 0.00000E+00, 1.15741E-02
+"lb/ft-sec",    "LBFS",     "Pound/foot-second",          1, 0.00000E+00, 1.48816E+03
+"lb/ft-min",    "LB/FM",    "Pound/foot-minute",          1, 0.00000E+00, 2.48027E+01
+"lb/ft-hr",     "LBFH",     "Pound/foot-hour",            1, 0.00000E+00, 4.13379E-01
+"lb/ft-day",    "LB/FD",    "Pound/foot-day",             1, 0.00000E+00, 1.72242E-02
+"lb-sec/ft2",   "LBSF",     "Pound-second/foot^2",        1, 0.00000E+00, 4.78801E+04
+
+"W/m-K",        "WMK",      "Watt/meter-Kelvin",          0, 0.00000E+00, 1.00000E+00
+"W/m-C",        "WMC",      "Watt/meter-Celsius",         0, 0.00000E+00, 1.00000E+00
+"kW/m-K",       "KWMK",     "Kilowatt/meter-Kelvin",      0, 0.00000E+00, 1.00000E+03
+"kW/m-C",       "KWMC",     "Kilowatt/meter-C",           0, 0.00000E+00, 1.00000E+03
+"cal/sec-cm-C", "CALS",     "Calorie/second-cm-C",        0, 0.00000E+00, 4.18680E+02
+"cal/hr-m-C",   "CAL/H",    "Calorie/hour-meter-C",       0, 0.00000E+00, 1.16300E-03
+"kcal/hr-m-C",  "KCH",      "Kilocalorie/hour-m-C",       0, 0.00000E+00, 1.16300E+00
+"BTU/hr-ft-F",  "BTUH",     "BTU/hour-foot-F",            1, 0.00000E+00, 1.73074E+00
+
+"g/cm",         "G/CM",     "Gram/centimeter",            0, 0.00000E+00, 1.00000E+00
+"Dyne/cm",      "DYNE",     "Dyne/centimeter",            0, 0.00000E+00, 1.01972E-03
+"N/m",          "NM",       "Newton/meter",               0, 0.00000E+00, 1.01972E+00
+"PDL/in",       "PDL/I",    "Poundal/inch",               1, 0.00000E+00, 5.55043E+00
+
+"W/m2-K",       "WMK",      "Watt/meter^2-K",             0, 0.00000E+00, 1.00000E+00
+"W/m2-C",       "WMC",      "Watt/meter^2-C",             0, 0.00000E+00, 1.00000E+00
+"kW/m2-K",      "KW/MK",    "Kilowatt/meter^2-K",         0, 0.00000E+00, 1.00000E+03
+"cal/sec-cm2-C","CALS",     "Calorie/sec-cm^2-C",         0, 0.00000E+00, 4.18680E+04
+"kcal/hr-m2-C", "KCH",      "Kilocalorie/hour-m^2-C",     0, 0.00000E+00, 1.16300E+00
+"kcal/hr-m2-K", "KC/H",     "Kilocalorie/hour-m^2-K",     0, 0.00000E+00, 1.16300E+00
+"kJ/hr-m2-K",   "KJ/H",     "Kilojoule/hour-m^2-K",       0, 0.00000E+00, 2.77778E-01
+"BTU/hr-ft2-F", "BTUH",     "BTU/hour-foot^2-F",          1, 0.00000E+00, 5.67826E+00
+
+"W/K",          "W/K",      "Watt/K",                     0, 0.00000E+00, 1.00000E+00
+"kW/K",         "KW/K",     "Kilowatt/K",                 0, 0.00000E+00, 1.00000E+03
+"kcal/hr-K",    "KC/HC",    "Kilocalorie/hour-K",         0, 0.00000E+00, 1.16300E+00
+"kJ/hr-K",      "KJ/HK",    "Kilojoule/hour-K",           0, 0.00000E+00, 2.77778E-01
+"BTU/hr-F",     "BTU/HF",   "BTU/hour-F",                 1, 0.00000E+00, 5.27527E-01
+
+"m2-K/W",       "MK/W",     "Meter^2-Kelvin/W",           0, 0.00000E+00, 1.00000E+00
+"m2-K/kW",      "MK/KW",    "Meter^2-Kelvin/kW",          0, 0.00000E+00, 1.00000E-03
+"hr-m2-C/kcal", "HMC/K",    "Hour-meter^2-C/kcal",        0, 0.00000E+00, 8.59845E-01
+"hr-m2-K/kJ",   "HMK/K",    "Hour-meter^2-K/kJ",          0, 0.00000E+00, 3.60000E+00
+"hr-ft2-F/BTU", "HFF/B",    "Hour-foot^2-F/BTU",          1, 0.00000E+00, 1.76110E-01
+
+"API",          "API",      "API gravity",                1, 0.00000E+00, 1.00000E+00
+// 0.000999014 is water density in kg/cm3.
+"spgr",         "SPGR",     "Specific gravity",           0, 0.00000E+00, 9.99014E-04
+
+"DEB",          "DEB",      "Debye",                      0, 0.00000E+00, 1.00000E+00
+"Coul-m",       "COUL",     "Coulomb-meter",              0, 0.00000E+00, 2.99792E+29
+"EU",           "EU",       "Electrostatic unit",         0, 0.00000E+00, 1.00000E+18
+
+// IN/S consistent with SXGEN.DIM
+"cST",          "CST",      "Centistoke",                 0, 0.00000E+00, 1.00000E+00
+"ST",           "ST",       "Stoke",                      0, 0.00000E+00, 1.00000E+02
+"in2/sec",      "IN/S",     "Inch^2/second",              1, 0.00000E+00, 6.45160E+02
+"m2/sec",       "M2/S",     "Meter^2/second",             0, 0.00000E+00, 1.00000E+06
+
+// Flow conductance Kv, the metric equivalent of Cv (CBCF#80: correct Kv conversion factor)
+// Kv = 0.853 Cv
+// Cv = 1.16 Kv
+"K-v",           "K-V",       "Valve conductance, metric equivalent of Cv", 0, 0.0, 2.77669618E-05
+  
+// Internal PRO/II units for heat capacity are "KJ/K"  (= kJ/kg-K)
+// "-mole" from columns 2 and 4 so they match column 3 (keyword conventions)
+// Changed by BDC to fix bug 7260,  12 Dec, 2000
+
+"J/g-K",    "J/G-K",    "Joule/gram-K",          0, 0.00000E+00, 1.00000E+00
+"J/kg-K",   "J/KG-K",   "Joule/kilogram-K",      0, 0.00000E+00, 1.00000E-03
+"kJ/g-K",   "KJ/G-K",   "Kilojoule/gram-K",      0, 0.00000E+00, 1.00000E+03
+"kJ/kg-K",  "KJ/KG-K",  "Kilojoule/kg-K",        0, 0.00000E+00, 1.00000E+00
+"MJ/g-K",   "MJ/G-K",   "Megajoule/gram-K",      0, 0.00000E+00, 1.00000E+06
+"MJ/kg-K",  "MJ/KG-K",  "Megajoule/kg-K",        0, 0.00000E+00, 1.00000E+03
+"cal/g-K",  "CAL/G-K",  "Calorie/gram-K",        0, 0.00000E+00, 4.18680E+00
+"cal/kg-K", "CAL/KG-K", "Calorie/kg-K",          0, 0.00000E+00, 4.18680E-03
+"kcal/g-K", "KCAL/G-K", "Kilocalorie/g-K",       0, 0.00000E+00, 4.18680E+03
+"kcal/kg-K","KCAL/KG-K","Kilocalorie/kg-K",      0, 0.00000E+00, 4.18680E+00
+"BTU/lb-F", "BTU/LB-F", "BTU/pound-F",           1, 0.00000E+00, 4.18680E+00
+"BTU/lb-C", "BTU/LB-C", "BTU/pound-C",           1, 0.00000E+00, 2.32601E+00
+"BTU/lb-K", "BTU/LB-K", "BTU/pound-K",           1, 0.00000E+00, 2.32601E+00
+"CHU/g-F",  "CHU/G-F",  "CHU/gram-F",            0, 0.00000E+00, 3.41838E+03
+"CHU/kg-F", "CHU/KG-F", "CHU/kilogram-F",        0, 0.00000E+00, 3.41838E+00
+"CHU/lb-F", "CHU/LB-F", "CHU/pound-F",           1, 0.00000E+00, 7.53624E+00
+"PCU/g-F",  "PCU/G-F",  "PCU/gram-F",            0, 0.00000E+00, 3.41838E+03
+"PCU/kg-F", "PCU/KG-F", "PCU/kilogram-F",        0, 0.00000E+00, 3.41838E+00
+"PCU/lb-F", "PCU/LB-F", "PCU/pound-F",           1, 0.00000E+00, 7.53624E+00
+"J/g-C",    "J/G-C",    "Joule/gram-C",          0, 0.00000E+00, 1.00000E+00
+"J/kg-C",   "J/KG-C",   "Joule/kg-C",            0, 0.00000E+00, 1.00000E-03
+"kJ/g-C",   "KJ/G-C",   "Kilojoule/gram-C",      0, 0.00000E+00, 1.00000E+03
+"kJ/kg-C",  "KJ/KG-C",  "Kilojoule/kg-C",        0, 0.00000E+00, 1.00000E+00
+"cal/g-C",  "CAL/G-C",  "Calorie/gram-C",        0, 0.00000E+00, 4.18680E+00
+"cal/kg-C", "CAL/KG-C", "Calorie/kg-C",          0, 0.00000E+00, 4.18680E-03
+"kcal/g-C", "KCAL/G-C", "Kilocalorie/g-C",       0, 0.00000E+00, 4.18680E+03
+"kcal/kg-C","KCAL/KG-C","Kilocalorie/kg-C",      0, 0.00000E+00, 4.18680E+00
+
+"N-m",          "N-M",      "Newton-meters",              0, 0.00000E+00, 1.00000E+00
+"lb-ft",        "LB-FT",    "Pound-feet",                 1, 0.00000E+00, 1.35581E+00
+
+"fraction",     "FRAC",     "Fraction",                   0, 0.00000E+00, 1.00000E+00
+"p.u.",         "p.u.",     "Per Unit",                   0, 0.00000E+00, 1.00000E+00
+"percent",      "PCT",      "Percent",                    0, 0.00000E+00, 1.00000E-02
+"ppm",          "PPM",      "Parts Per Million",          0, 0.00000E+00, 1.00000E-06
+"ppb",          "PPB",      "Parts Per Billion",          0, 0.00000E+00, 1.00000E-09
+
+"currency",     "",         "currency",                   0, 0.00000E+00, 1.00000E+00
+"$",            "$",        "US Dollars",                 0, 0.00000E+00, 1.00000E+00
+"cents",        "",         "US cents",                   0, 0.00000E+00, 1.00000E+00
+"EUR",          "",         "Euro",                       0, 0.00000E+00, 1.00000E+00
+"DEM",          "",         "German Mark",                0, 0.00000E+00, 1.00000E+00
+"CHF",          "",         "Swiss Francs",               0, 0.00000E+00, 1.00000E+00
+"JPY",          "",         "Japanese Yen",               0, 0.00000E+00, 1.00000E+00
+"GBP",          "",         "British Pound",              0, 0.00000E+00, 1.00000E+00
+"Pence",        "",         "British Pence",              0, 0.00000E+00, 1.00000E+00
+"CAD",          "",         "Canadian Dollar",            0, 0.00000E+00, 1.00000E+00
+"AUD",          "",         "Australian Dollar",          0, 0.00000E+00, 1.00000E+00
+"FRF",          "",         "French Francs",              0, 0.00000E+00, 1.00000E+00
+"ITL",          "",         "Italian Lira",               0, 0.00000E+00, 1.00000E+00
+"BEF",          "",         "Belgian Franc",              0, 0.00000E+00, 1.00000E+00
+"DKK",          "",         "Danish Krone",               0, 0.00000E+00, 1.00000E+00
+"SEK",          "",         "Swedish Krone",              0, 0.00000E+00, 1.00000E+00
+"FIM",          "",         "Finnish Markka",             0, 0.00000E+00, 1.00000E+00
+"NOK",          "",         "Norwegian Krone",            0, 0.00000E+00, 1.00000E+00
+"ESP",          "",         "Spanish Peseta",             0, 0.00000E+00, 1.00000E+00
+"HKD",          "",         "Hong Kong Dollar",           0, 0.00000E+00, 1.00000E+00
+"SGD",          "",         "Singapore Dollar",           0, 0.00000E+00, 1.00000E+00
+"MXN",          "",         "Mexican Peso",               0, 0.00000E+00, 1.00000E+00
+"ECU",          "",         "European Currency",          0, 0.00000E+00, 1.00000E+00
+"ARS",          "",         "Argentinian Peso",           0, 0.00000E+00, 1.00000E+00
+"CLP",          "",         "Chilean Peso",               0, 0.00000E+00, 1.00000E+00
+"CRC",          "",         "Costa Rica Colon",           0, 0.00000E+00, 1.00000E+00
+"ECS",          "",         "Equadorian Sucre",           0, 0.00000E+00, 1.00000E+00
+"GYD",          "",         "Guatemala Quetzal",          0, 0.00000E+00, 1.00000E+00
+"HNL",          "",         "Honduras Lempira",           0, 0.00000E+00, 1.00000E+00
+"DMR",          "",         "Dominican Republic Peso",    0, 0.00000E+00, 1.00000E+00
+"BRE",          "",         "Brazilian Real",             0, 0.00000E+00, 1.00000E+00
+"COP",          "",         "Colombian Peso",             0, 0.00000E+00, 1.00000E+00
+"PEN",          "",         "Peruvian New Sol",           0, 0.00000E+00, 1.00000E+00
+"SVC",          "",         "El Salvador Colon",          0, 0.00000E+00, 1.00000E+00
+"VEB",          "",         "Venezuelan Bolivar",         0, 0.00000E+00, 1.00000E+00
+"credits",      "",         "credits",                    0, 0.00000E+00, 1.00000E+00
+"P2credits",    "",         "PRO/II Charge Units",        0, 0.00000E+00, 1.00000E+00
+
+"rps",          "RPS",      "Rotations per second",       0, 0.00000E+00, 1.00000E+00
+"rpm",          "RPM",      "Rotations per minute",       0, 0.00000E+00, 1.66666666667E-02
+"rph",          "RPH",      "Rotations per hour",         0, 0.00000E+00, 2.77777777778E-04
+"rpd",          "RPD",      "Rotations per day",          0, 0.00000E+00, 1.15740740741E-05
+"rad/sec",      "RAD/SEC",  "Radians per second",         0, 0.00000E+00, 1.591549431E-01
+
+"revolution",   "REV",      "Revolution",                 0, 0.00000E+00, 1.00000E+00
+"degree",       "DEG",      "Degree",                     0, 0.00000E+00, 2.777777778E-03
+"radian",       "RAD",      "Radian",                     0, 0.00000E+00, 1.591549431E-01
+
+"V",            "VOLT",     "Volt",                       0, 0.00000E+00, 1.00000E+00
+"kV",           "KV",       "Kilovolt",                   0, 0.00000E+00, 1.00000E+03
+
+"Amp",          "AMPERE",   "Ampere",                     0, 0.00000E+00, 1.00000E+00
+"kAmp",         "KAMPERE",  "Kiloampere",                 0, 0.00000E+00, 1.00000E+03
+
+"Ohm",          "OHM",      "Ohm",                        0, 0.00000E+00, 1.00000E+00
+"kOhm",         "KOHM",     "KiloOhm",                    0, 0.00000E+00, 1.00000E+03
+
+// Special UOMs for Flow Conductance.
+
+"Cv",                          "FLO1", "gpm/sqrt(psi-spgr)",          0, 0.00000E+00, 2.40152927537E-05
+"gpm/sqrt(psi-spgr)",          "FL02", "gpm/sqrt(psi-spgr)",          0, 0.00000E+00, 2.40152927537E-05
+"(kg/sec)/sqrt(Pa-kg/m3)",     "FLO3", "(kg/sec)/sqrt(Pa-kg/m3)",     0, 0.00000E+00, 1.00000000000E+00
+"(kg/sec)/sqrt(kPa-kg/m3)",    "FLO4", "(kg/sec)/sqrt(kPa-kg/m3)",    0, 0.00000E+00, 3.16227766017E-02
+"(lb/sec)/sqrt(inH2O-lb/ft3)", "FLO5", "(lb/sec)/sqrt(inH2O-lb/ft3)", 0, 0.00000E+00, 7.18443851618E-03
+"(lb/sec)/sqrt(psi-lb/ft3)",  "FLO6",  "(lb/sec)/sqrt(psi-lb/ft3)",   0, 0.00000E+00, 1.36488471428E-03
+"(lb/hr)/sqrt(psi-lb/ft3)",    "FLO7", "(lb/hr)/sqrt(psi-lb/ft3)",    0, 0.00000E+00, 3.79134642857E-07
+
+// Spelling of UOMs for the "Basis" class must match the
+// corresponding UOM class. For instance, if there is
+// a "StdLiqVol" UOM selection for "Basis", then there must
+// be a "StdLiqVol" UOM class.
+
+"Molar",        "MOLE",     "Molar",                      0, 0.00000E+00, 1.00000E+00
+"Mole",         "MOLE",     "Mole",                       0, 0.00000E+00, 1.00000E+00
+"Mass",         "WT",       "Mass",                       0, 0.00000E+00, 1.00000E+00
+"Vol",          "AVOL",     "Actual Volume",              0, 0.00000E+00, 1.00000E+00
+"StdLiqVol",    "LVOL",     "Liquid Volume",              0, 0.00000E+00, 1.00000E+00
+"StdVapVol",    "GVOL",     "Vapor Volume",               0, 0.00000E+00, 1.00000E+00
+"ENDUOMLIST"
+
+//
+// Unit-of-Measure Selection Lists
+// For each base class in the UOM Server, these lists
+// define the recognized units-of-measure for the class.
+//
+
+"BEGINLIST"
+"Temp"
+"K"
+"C"
+"R"
+"F"
+"ENDLIST"
+
+"BEGINLIST"
+"TempAbs"
+"K"
+"R"
+"ENDLIST"
+
+"BEGINLIST"
+"TempDiff"
+"K"
+"C"
+"R"
+"F"
+"ENDLIST"
+
+"BEGINLIST"
+"Pres"
+"psia"
+"psig"
+"atm"
+"kPa"
+"kPag"
+"kg/cm2"
+"kg/cm2g"
+"ata"
+"ate"
+"bar"
+"barg"
+"mbar"
+"mbarg"
+"dyne/cm2"
+"in Hg"
+"in Hgg"
+"mm Hg"
+"mm Hgg"
+"MPa"
+"MPag"
+"N/m2"
+"Pa"
+"Pag"
+"psf"
+"torr"
+"in H2O"
+"in H2Og"
+"mm H2O"
+"mm H2Og"
+"ft H2O"
+"ft H2Og"
+"ENDLIST"
+
+"BEGINLIST"
+"PresAbs"
+"psia"
+"atm"
+"kPa"
+"kg/cm2"
+"ata"
+"bar"
+"mbar"
+"dyne/cm2"
+"in Hg"
+"mm Hg"
+"MPa"
+"N/m2"
+"Pa"
+"psf"
+"torr"
+"in H2O"
+"mm H2O"
+"ft H2O"
+"ENDLIST"
+
+"BEGINLIST"
+"PresDiff"
+"psi"
+"atm"
+"kPa"
+"kg/cm2"
+"ate"
+"ata"
+"bar"
+"mbar"
+"dyne/cm2"
+"in Hg"
+"mm Hg"
+"MPa"
+"N/m2"
+"Pa"
+"psf"
+"torr"
+"in H2O"
+"in H2Og"
+"mm H2O"
+"mm H2Og"
+"ft H2O"
+"ft H2Og"
+"ENDLIST"
+
+"BEGINLIST"
+"Time"
+"sec"
+"min"
+"hr"
+"day"
+"wk"
+"mon"
+"yr"
+"ENDLIST"
+
+"BEGINLIST"
+"Leng"
+"in"
+"ft"
+"mm"
+"cm"
+"m"
+"ang"
+"mmic"
+"mic"
+"dm"
+"km"
+"yd"
+"mi"
+"ENDLIST"
+
+"BEGINLIST"
+"FineLeng"
+"in"
+"ft"
+"mm"
+"cm"
+"m"
+"ang"
+"mmic"
+"mic"
+"dm"
+"km"
+"yd"
+"mi"
+"ENDLIST"
+
+"BEGINLIST"
+"Area"
+"in2"
+"ft2"
+"cm2"
+"m2"
+"ang2"
+"mmic2"
+"mic2"
+"mm2"
+"dm2"
+"km2"
+"yd2"
+"mi2"
+"hect"
+"acre"
+"ENDLIST"
+
+"BEGINLIST"
+"FineArea"
+"in2"
+"ft2"
+"cm2"
+"m2"
+"ang2"
+"mmic2"
+"mic2"
+"mm2"
+"dm2"
+"km2"
+"yd2"
+"mi2"
+"hect"
+"acre"
+"ENDLIST"
+
+"BEGINLIST"
+"Vol"
+"ft3"
+"gal"
+"bbl"
+"cm3"
+"liter"
+"m3"
+"mm3"
+"dm3"
+"km3"
+"in3"
+"yd3"
+"mi3"
+"KL"
+"igal"
+"Mft3"
+"Mgal"
+"Mbbl"
+"MMft3"
+"MMgal"
+"ENDLIST"
+
+"BEGINLIST"
+"StdLiqVol"
+"ft3"
+"gal"
+"bbl"
+"cm3"
+"liter"
+"m3"
+"mm3"
+"dm3"
+"km3"
+"in3"
+"yd3"
+"mi3"
+"KL"
+"igal"
+"Mft3"
+"Mgal"
+"Mbbl"
+"MMft3"
+"MMgal"
+"ENDLIST"
+
+"BEGINLIST"
+"StdVapVol"
+"ft3"
+"liter"
+"m3"
+"mm3"
+"cm3"
+"dm3"
+"km3"
+"in3"
+"yd3"
+"mi3"
+"KL"
+"Mft3"
+"MMft3"
+"ENDLIST"
+
+"BEGINLIST"
+"Mass"
+"lb"
+"klb"
+"kg"
+"tonm"
+"g"
+"oz"
+"ton"
+"tonl"
+"ktonm"
+"ENDLIST"
+
+"BEGINLIST"
+"Molar"
+"lb-mol"
+"kg-mol"
+"g-mol"
+"tonm-mol"
+"oz-mol"
+"ton-mol"
+"tonl-mol"
+"ktonm-mol"
+"ENDLIST"
+
+"BEGINLIST"
+"Mole"
+"lb-mol"
+"kg-mol"
+"g-mol"
+"tonm-mol"
+"oz-mol"
+"ton-mol"
+"tonl-mol"
+"ktonm-mol"
+"nm3"
+"scf"
+"ENDLIST"
+
+"BEGINLIST"
+"Energy"
+"BTU"
+"kJ"
+"kcal"
+"kw-hr"
+"J"
+"cal"
+"g-cm"
+"kg-m"
+"ft-lb"
+"CHU"
+"PCU"
+"ENDLIST"
+
+"BEGINLIST"
+"E6Energy"
+"x 10^6 BTU"
+"x 10^6 kJ"
+"x 10^6 Kcal"
+"x 10^6 KWH"
+"x 10^6 J"
+"x 10^6 cal"
+"x 10^6 gcm"
+"x 10^6 kgm"
+"x 10^6 ftlb"
+"x 10^6 CHU"
+"x 10^6 PCU"
+"ENDLIST"
+
+"BEGINLIST"
+"Visc"
+"cP"
+"POIS"
+"Pa-sec"
+"kg/m-sec"
+"kg/m-min"
+"kg/m-hr"
+"kg/m-day"
+"lb/ft-sec"
+"lb/ft-min"
+"lb/ft-hr"
+"lb/ft-day"
+"lb-sec/ft2"
+"ENDLIST"
+
+"BEGINLIST"
+"Cond"
+"BTU/hr-ft-F"
+"W/m-C"
+"W/m-K"
+"kW/m-K"
+"kW/m-C"
+"cal/sec-cm-C"
+"cal/hr-m-C"
+"kcal/hr-m-C"
+"ENDLIST"
+
+"BEGINLIST"
+"Surf"
+"g/cm"
+"dyne/cm"
+"N/m"
+"PDL/in"
+"ENDLIST"
+
+"BEGINLIST"
+"Htco"
+"BTU/hr-ft2-F"
+"kJ/hr-m2-K"
+"kW/m2-K"
+"cal/sec-cm2-K"
+"cal/sec-cm2-C"
+"kcal/hr-m2-K"
+"kcal/hr-m2-C"
+"W/m2-K"
+"W/m2-C"
+"ENDLIST"
+
+"BEGINLIST"
+"UA"
+"BTU/hr-F"
+"kJ/hr-K"
+"kW/K"
+"kcal/hr-K"
+"W/K"
+"ENDLIST"
+
+"BEGINLIST"
+"Foul"
+"hr-ft2-F/BTU"
+"m2-K/kW"
+"hr-m2-C/kcal"
+"hr-m2-K/kJ"
+"m2-K/W"
+"ENDLIST"
+
+"BEGINLIST"
+"Dipole"
+"DEB"
+"Coul-m"
+"EU"
+"ENDLIST"
+
+"BEGINLIST"
+"KVis"
+"cST"
+"ST"
+"in2/sec"
+"m2/sec"
+"ENDLIST"
+
+"BEGINLIST"
+"Cp"
+"BTU/lb-F"
+"kJ/kg-K"
+"kJ/kg-C"
+"kcal/kg-C"
+"J/g-K"
+"kcal/kg-K"
+"cal/g-K"
+"J/kg-K"
+"kJ/g-K"
+"MJ/g-K"
+"MJ/kg-K"
+"cal/kg-K"
+"kcal/g-K"
+"J/g-C"
+"J/kg-C"
+"kJ/g-C"
+"cal/g-C"
+"cal/kg-C"
+"kcal/g-C"
+"BTU/lb-C"
+"BTU/lb-K"
+"CHU/g-F"
+"CHU/kg-F"
+"CHU/lb-F"
+"PCU/g-F"
+"PCU/kg-F"
+"PCU/lb-F"
+"ENDLIST"
+
+"BEGINLIST"
+"Torque"
+"N-m"
+"lb-ft"
+"ENDLIST"
+
+"BEGINLIST"
+"Frac"
+"fraction"
+"p.u."
+"percent"
+"ppm"
+"ppb"
+"ENDLIST"
+
+"BEGINLIST"
+"MassFrac"
+"fraction"
+"percent"
+"ppm"
+"ppb"
+"ENDLIST"
+
+"BEGINLIST"
+"MoleFrac"
+"fraction"
+"percent"
+"ppm"
+"ppb"
+"ENDLIST"
+
+"BEGINLIST"
+"VolFrac"
+"fraction"
+"percent"
+"ppm"
+"ppb"
+"ENDLIST"
+
+"BEGINLIST"
+"Currency"
+"currency"
+"$",
+"cents",
+"EUR",
+"DEM",
+"CHF",
+"JPY",
+"GBP",
+"Pence"
+"CAD"
+"AUD"
+"FRF"
+"ITL"
+"BEF"
+"DKK"
+"SEK"
+"FIM"
+"NOK"
+"ESP"
+"HKD"
+"SGD"
+"MXN"
+"ECU"
+"ARS"
+"CLP"
+"CRC"
+"ECS"
+"GYD"
+"HNL"
+"DMR"
+"BRE"
+"COP"
+"PEN"
+"SVC"
+"VEB"
+"credits"
+"P2credits"
+"ENDLIST"
+
+"BEGINLIST"
+"Rotation"
+"rps"
+"rpm"
+"rph"
+"rpd"
+"rad/sec"       
+"ENDLIST"
+
+"BEGINLIST"
+"Angle"
+"revolution"
+"degree"
+"radian"
+"ENDLIST"
+
+"BEGINLIST"
+"FlowConductance"
+"Cv"
+"K-v"
+"(kg/sec)/sqrt(Pa-kg/m3)"
+"(kg/sec)/sqrt(kPa-kg/m3)"
+"(lb/sec)/sqrt(inH2O-lb/ft3)"
+"(lb/sec)/sqrt(psi-lb/ft3)"
+"(lb/hr)/sqrt(psi-lb/ft3)"
+"gpm/sqrt(psi-spgr)"
+"ENDLIST"
+
+"BEGINLIST"
+"Basis"
+"Molar"
+"Mole"
+"Mass"
+"Vol"
+"StdLiqVol"
+"StdVapVol"
+"ENDLIST"
+
+"BEGINLIST"
+"Potential"
+"V"
+"kV"
+"ENDLIST"
+
+"BEGINLIST"
+"Current"
+"Amp"
+"kAmp"
+"ENDLIST"
+
+"BEGINLIST"
+"Resistance"
+"Ohm"
+"kOhm"
+"ENDLIST"
+
+"BEGINLIST"
+"Inductance"
+"H"
+"mH"
+"muH"
+"ENDLIST"
+
+"BEGINLIST"
+"Capacitance"
+"F"
+"mF"
+"muF"
+"ENDLIST"
+
+"BEGINLIST"
+"PetroMass"
+"API"
+"spgr"
+"lb"
+"kg"
+"tonm"
+"g"
+"oz"
+"ton"
+"tonl"
+"ENDLIST"
+
+"BEGINLIST"
+"PowerTop"
+"HP"
+"kW"
+"MW"
+"W"
+"J"
+"kJ"
+"cal"
+"kcal"
+"g-cm"
+"kg-m"
+"ft-lb"
+"BTU"
+"CHU"
+"PCU"
+"kW-hr"
+"VA"
+"kVA"
+"MVA"
+"VAR"
+"kVAR"
+"MVAR"
+"ENDLIST"
+
+"BEGINLIST"
+"E6PowerTop"
+"x 10^6 BTU"
+"x 10^6 kJ"
+"x 10^6 Kcal"
+"x 10^6 kW"
+"x 10^6 MW"
+"x 10^6 J"
+"x 10^6 cal"
+"x 10^6 W"
+"x 10^6 gcm"
+"x 10^6 kgm"
+"x 10^6 ftlb"
+"x 10^6 CHU"
+"x 10^6 PCU"
+"x 10^6 HP"
+"x 10^6 KWH"
+"x 10^6 VA"
+"x 10^6 VAR"
+"ENDLIST"
+
+"BEGINLIST"
+"Power"
+"HP"
+"kW"
+"MW"
+"W"
+"J/sec"
+"kJ/sec"
+"MJ/sec"
+"VA"
+"kVA"
+"MVA"
+"VAR"
+"kVAR"
+"MVAR"
+"ENDLIST"
+
+"BEGINLIST"
+"RMBasisList"
+"Molar"
+"Mass"
+"Vol"
+"StdLiqVol"
+"StdVapVol"
+"ENDLIST"
+
+//
+// Unit-of-Measure Custom Class List
+//
+// Entries in this list are of the form
+//   uomclass=uomdef,uomclasslongname
+// where:
+// uomclass (required) is the name of the new uom class and
+//   uomdef is an algebraic (multiply/divide) combination
+//   of existing UOM classes. Note: If you add new classes
+//   to this list you must also provide defaults for them in
+//   the definition of UOM Slates below. Currently, they do
+//   not inherit the default from the class from which they are
+//   defined. Note: these new classes are defined *after* the
+//   UOM Lists so that the UOM lists can be properly copied
+//   to the new classes.
+// uomclasslongname (optional) is the long name used for presentation in the GUI.
+//
+"BEGINCLASSLIST"
+MolarCp="Energy / Mole TempDiff"
+MolarEnergy=Energy/Mole
+MolarDensity=Mole/Vol
+MolarEntropy="Energy / TempDiff Mole"
+HXDuty=Energy/Time
+Film=Htco,"Film Coefficient"
+RhoVV=Mass/Leng/Time2,"Rho-V2"
+FineTime=Time,"Fine Time"
+FineLengInverse=1/FineLeng
+FlowConductanceValve=FlowConductance,"Valve Flow Conductance"
+ElecPower=Power,"Electrical Power"
+Inductance=Inductance,"Electrical Inductance"
+Capacitance=Capacitance,"Electrical Capacitance"
+"ENDCLASSLIST"
+
+//
+// Start of "common" UOM choices.
+// These lists can be used to restrict the available
+// UOM choices due to application-specific restrictions.
+// They can also be used to present the available UOM choices
+// in a more convenient order.
+//
+
+"BEGINCOMMONLIST"
+"P2TimeList"
+"sec"
+"min"
+"hr"
+"day"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2RateMassList"
+"lb"
+"g"
+"kg"
+"tonm"
+"ton"
+"tonl"
+"ktonm"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2RateMoleList"
+"lb-mol"
+"g-mol"
+"kg-mol"
+"tonm-mol"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2RateLiqVolList"
+"ft3"
+"gal"
+"bbl"
+"liter"
+"m3"
+"igal"
+"KL"
+"Mft3"
+"Mgal"
+"Mbbl"
+"MMft3"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2RateVapVolList"
+"ft3
+"liter"
+"m3"
+"KL"
+"Mft3"
+"MMft3"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2DensMassList"
+"lb"
+"kg"
+"g"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2DensLiqVolList"
+"ft3"
+"gal"
+"bbl"
+"liter"
+"m3"
+"cm3"
+"in3"
+"igal"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2DensMoleList"
+"lb-mol"
+"kg-mol"
+"g-mol"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2DensVapVolList"
+"ft3"
+"liter"
+"m3"
+"cm3"
+"in3"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2EnthalpyEnergyList"
+"J"
+"kJ"
+"MJ"
+"cal"
+"kcal"
+"BTU"
+"CHU"
+"PCU"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2EnthalpyMassList"
+"g"
+"kg"
+"lb"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2EnthalpyMoleList"
+"g-mol"
+"kg-mol"
+"lb-mol"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2HeatCapList"
+"BTU/lb-F"
+"kJ/kg-K"
+"J/g-K"
+"kcal/kg-K"
+"cal/g-K"
+"J/kg-K"
+"kJ/g-K"
+"MJ/g-K"
+"MJ/kg-K"
+"cal/kg-K"
+"kcal/g-K"
+"CHU/g-F"
+"CHU/kg-F"
+"CHU/lb-F"
+"PCU/g-F"
+"PCU/kg-F"
+"PCU/lb-F"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"DensPetroMassList"
+"API"
+"spgr"
+"lb"
+"g"
+"kg"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"P2LengthList"
+"mm"
+"cm"
+"m"
+"in"
+"ft"
+"ENDCOMMONLIST"
+
+//
+// Custom subsets of "Basis" choices
+//
+
+"BEGINCOMMONLIST"
+"WMBasisList"
+"Mass"
+"Molar"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"WLVBasisList"
+"Mass"
+"StdLiqVol"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"WMLVGVBasisList"
+"Mass"
+"Molar"
+"StdLiqVol"
+"StdVapVol"
+"ENDCOMMONLIST"
+
+//
+// Custom UOM lists for HEXTRAN
+//
+
+"BEGINCOMMONLIST"
+"HXAreaList"
+"ft2"
+"m2"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXDensityList"
+"lb/ft3"
+"kg/m3"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXEnergyList"
+"BTU"
+"kcal"
+"kJ"
+"PCU"
+"CHU"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXE6EnergyList"
+"x 10^6 BTU"
+"x 10^6 Kcal"
+"x 10^6 kJ"
+"x 10^6 KWH"
+"x 10^6 PCU"
+"x 10^6 CHU"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXHtcoList"
+"BTU/hr-ft2-F"
+"cal/sec-cm2-C"
+"kcal/hr-m2-C"
+"W/m2-C"
+"W/m2-K"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXLiqVolList"
+"ft3"
+"gal"
+"igal"
+"bbl"
+"m3"
+"liter"
+"dm3"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXPowerList"
+"HP"
+"kW"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXPresList"
+"psia"
+"psig"
+"kg/cm2"
+"torr"
+"mm Hg"
+"Pa"
+"kPa"
+"MPa"
+"bar"
+"atm"
+"ate"
+"ata"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXSurfList"
+"N/m"
+"dyne/cm"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXTimeList"
+"day"
+"hr"
+"min"
+"sec"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXVapVolList"
+"ft3"
+"m3"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXViscList"
+"cP"
+"Pa-sec"
+"lb/ft-sec"
+"lb/ft-hr"
+"lb-sec/ft2"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXMassList"
+"lb"
+"kg"
+"ton"
+"tonl"
+"tonm"
+"ENDCOMMONLIST"
+
+"BEGINCOMMONLIST"
+"HXPetroDensityList"
+"API"
+"spgr"
+"lb/ft3"
+"kg/m3"
+"ENDCOMMONLIST"
+
+//
+// Unit-of-Measure Slates
+//
+
+// Internal units-of-measure for PRO/II
+"BEGINSLATE"
+P2Internal
+isSystem=1
+isHidden=1
+allowDelete=0
+allowModify=0
+GaugePresBasis=101325
+Temp=K
+Pres=kPa
+Time=sec
+FineTime=sec
+Leng=m
+FineLeng=m
+FineArea=m2
+Mass=kg
+Molar=kg-mol
+Mole=kg-mol
+Energy=kJ
+Visc=Pa-sec
+Cond=W/m-K
+Surf=N/m
+Htco=kW/m2-K
+UA=kW/K
+RUA=kW/K4
+Foul=m2-K/kW
+Dipole=Deb
+KVis=cST
+Cp=kJ/kg-K
+Torque=N-m
+Frac=fraction
+MassFrac=fraction
+MoleFrac=fraction
+VolFrac=fraction
+Currency=currency
+Rotation=rps
+Angle=revolution
+FlowConductance=(kg/sec)/sqrt(kPa-kg/m3)
+FlowConductanceValve=(kg/sec)/sqrt(kPa-kg/m3)
+Basis=molar
+Potential=V
+Current=Amp
+Resistance=Ohm
+PetroMass=kg
+PowerTop=kJ
+E6PowerTop=kJ
+HXDuty=kJ/sec
+Film=kW/m2-K
+RhoVV=kg/m/sec2
+ElecPower=MW
+"ENDSLATE"
+
+// Internal units-of-measure for ROMeo.
+// Identical to PRO/II except for KVis
+"BEGINSLATE"
+RMInternal
+isSystem=1
+isHidden=1
+allowDelete=0
+allowModify=0
+GaugePresBasis=101325
+Temp=K
+Pres=kPa
+Time=sec
+FineTime=sec
+Leng=m
+FineLeng=m
+FineArea=m2
+Mass=kg
+Molar=kg-mol
+Mole=kg-mol
+Energy=kJ
+E6Energy=kJ
+Visc=Pa-sec
+Cond=kW/m-K
+Surf=N/m
+Htco=kW/m2-K
+UA=kW/K
+RUA=kW/K4
+Foul=m2-K/kW
+Dipole=Deb
+KVis=m2/sec
+Cp=kJ/kg-K
+Torque=N-m
+Frac=fraction
+MassFrac=fraction
+MoleFrac=fraction
+VolFrac=fraction
+Currency=currency
+Rotation=rps
+Angle=revolution
+FlowConductance=(kg/sec)/sqrt(kPa-kg/m3)
+FlowConductanceValve=(kg/sec)/sqrt(kPa-kg/m3)
+Basis=molar
+Potential=V
+Current=Amp
+Resistance=Ohm
+PetroMass=kg
+PowerTop=kJ
+E6PowerTop=kJ
+HXDuty=kJ/sec
+Film=kW/m2-K
+RhoVV=kg/m/sec2
+ElecPower=MW
+"ENDSLATE"
+
+// Internal units-of-measure for Modular Thermo
+// Identical to ROMeo except:
+//   Thermal Conductivity = kW/m-K
+//   Power - kW
+"BEGINSLATE"
+MTInternal
+isSystem=1
+isHidden=1
+allowDelete=0
+allowModify=0
+GaugePresBasis=101325
+Temp=K
+Pres=kPa
+Time=sec
+FineTime=sec
+Leng=m
+FineLeng=m
+FineArea=m2
+Mass=kg
+Molar=kg-mol
+Mole=kg-mol
+Energy=kJ
+E6Energy=kJ
+Visc=Pa-sec
+Cond=kW/m-K
+Surf=N/m
+Htco=kW/m2-K
+UA=kW/K
+RUA=kW/K4
+Foul=m2-K/kW
+Dipole=Deb
+KVis=m2/sec
+Cp=kJ/kg-K
+Torque=N-m
+Frac=fraction
+MassFrac=fraction
+MoleFrac=fraction
+VolFrac=fraction
+Currency=currency
+Rotation=rps
+Angle=radian
+FlowConductance=(kg/sec)/sqrt(kPa-kg/m3)
+FlowConductanceValve=(kg/sec)/sqrt(kPa-kg/m3)
+Basis=molar
+Potential=kV
+Current=Amp
+Resistance=kOhm
+PetroMass=kg
+PowerTop=kJ
+E6PowerTop=kJ
+HXDuty=kJ/sec
+Film=kW/m2-K
+RhoVV=kg/m/sec2
+ElecPower=MW
+StdLVRate=m3/hr
+Power=kW
+"ENDSLATE"
+
+// Internal units-of-measure for SIM4ME.
+// "true" SI
+"BEGINSLATE"
+S4MInternal
+isSystem=1
+isHidden=1
+allowDelete=0
+allowModify=0
+GaugePresBasis=101325
+Temp=K
+Pres=Pa
+Time=sec
+FineTime=sec
+Leng=m
+FineLeng=m
+FineArea=m2
+Mass=kg
+Molar=kg-mol
+Mole=kg-mol
+Energy=J
+E6Energy=J
+Visc=Pa-sec
+Cond=W/m-K
+Surf=N/m
+Htco=W/m2-K
+UA=W/K
+RUA=W/K4
+Foul=m2-K/W
+Dipole=Deb
+KVis=m2/sec
+Cp=J/kg-K
+Torque=N-m
+Frac=fraction
+MassFrac=fraction
+MoleFrac=fraction
+VolFrac=fraction
+Currency=currency
+Rotation=rps
+Angle=revolution
+FlowConductance=(kg/sec)/sqrt(Pa-kg/m3)
+FlowConductanceValve=(kg/sec)/sqrt(Pa-kg/m3)
+Basis=molar
+Potential=V
+Current=Amp
+Resistance=Ohm
+Inductance=Henry
+Capacitance=Farad
+PetroMass=kg
+PowerTop=J
+E6PowerTop=J
+HXDuty=J/sec
+Film=W/m2-K
+RhoVV=kg/m/sec2
+ElecPower=MW
+"ENDSLATE"
+
+
+// Default Internal units-of-measure for DynSim.
+// This slate is created to be a merge of MTInternal
+// and dynsim internal. Any deviations from MTInternal
+// are to be overwritten here.
+// The reason that this slate is copied from
+// the MTInternal slate is so that when the user
+// displays the Mod Thermo GUI, the values are
+// show in Mod Thermo internal units.
+"BEGINSLATE"
+DynSimDefault
+CopyFrom=MTInternal
+isSystem=1
+isHidden=1
+allowDelete=0
+allowModify=0
+Rotation=rpm
+Freq=1/sec
+FlowConductanceValve=Cv
+"ENDSLATE"
+
+
+// Internal units-of-measure for DynSim.
+// This is not really a true UOM Slate, but is only
+// used as a flag to indicate that Model Parameter
+// values and Point values should be displayed in
+// their internal units-of-measure. Note that in
+// DynSim, two parameters with the same UOM Class
+// can still use different units-of-measure as
+// their internal units-of-measure. DynSim does
+// not have the concept of an "internal unit of
+// Pressure", because each Pressure parameter defines
+// its own individual internal UOM. (Although this is
+// true, most of the cases have units-of-measure consistent with
+// DynSimDefault.)
+"BEGINSLATE"
+DynSimInternal
+Parent=DynSimDefault
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+"ENDSLATE"
+
+// "English" units-of-measure for SIM4ME
+"BEGINSLATE"
+English
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+GaugePresBasis=101325
+Temp=F
+Pres=psia
+Time=hr
+FineTime=sec
+Leng=ft
+FineLeng=in
+FineArea=in2
+Mass=lb
+Molar=lb-mol
+Mole=lb-mol
+Energy=BTU
+Visc=CP
+Cond=BTU/hr-ft-F
+Surf=dyne/cm
+Htco=BTU/hr-ft2-F
+UA=BTU/hr-F
+RUA=BTU/hr-F4
+Foul=hr-ft2-F/BTU
+Dipole=Deb
+KVis=cST
+Cp=BTU/lb-F
+Torque=lb-ft
+Frac=fraction
+MassFrac=fraction
+MoleFrac=fraction
+VolFrac=fraction
+Currency=currency
+Rotation=rpm
+Angle=degree
+FlowConductance=(lb/hr)/sqrt(psi-lb/ft3)
+FlowConductanceValve=Cv
+Basis=molar
+Potential=V
+Current=Amp
+Resistance=Ohm
+PetroMass=API
+PowerTop=BTU
+E6PowerTop=x 10^6 BTU
+HXDuty=BTU/hr
+Film=BTU/hr-ft2-F
+RhoVV=lb/ft/sec2
+ElecPower=MW
+Power=HP
+"ENDSLATE"
+
+// "Metric" units-of-measure for SIM4ME.
+"BEGINSLATE"
+Metric
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+GaugePresBasis=101325
+Temp=C
+Pres=kg/cm2
+PresAbs=kg/cm2
+PresDif=kg/cm2
+Time=hr
+FineTime=sec
+Leng=m
+FineLeng=mm
+FineArea=mm2
+Mass=kg
+Molar=kg-mol
+Mole=kg-mol
+Energy=kcal
+Visc=CP
+Cond=kcal/hr-m-C
+Surf=dyne/cm
+Htco=kcal/hr-m2-K
+UA=kcal/hr-K
+RUA=kcal/hr-K4
+Foul=hr-m2-C/kcal
+Dipole=Deb
+KVis=m2/sec
+Cp=kcal/kg-K
+Torque=N-m
+Frac=fraction
+MassFrac=fraction
+MoleFrac=fraction
+VolFrac=fraction
+Currency=currency
+Rotation=rpm
+Angle=degree
+FlowConductance=(kg/sec)/sqrt(kPa-kg/m3)
+FlowConductanceValve=Cv
+Basis=molar
+Potential=V
+Current=Amp
+Resistance=Ohm
+PetroMass=kg
+PowerTop=kcal
+HXDuty=kcal/hr
+Film=kcal/hr-m2-K
+RhoVV=kg/m/sec2
+ElecPower=MW
+Power=KW
+"ENDSLATE"
+
+// "SI" units-of-measure for SIM4ME.
+"BEGINSLATE"
+SI
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+GaugePresBasis=101325
+Temp=K
+Pres=kPa
+Time=hr
+FineTime=sec
+Leng=m
+FineLeng=mm
+FineArea=mm2
+Mass=kg
+Molar=kg-mol
+Mole=kg-mol
+Energy=kJ
+Visc=Pa-sec
+Cond=W/m-K
+Surf=N/m
+Htco=kW/m2-K
+UA=kW/K
+RUA=kW/K4
+Foul=m2-K/kW
+Dipole=Deb
+KVis=m2/sec
+Cp=J/kg-K
+Torque=N-m
+Frac=fraction
+MassFrac=fraction
+MoleFrac=fraction
+VolFrac=fraction
+Currency=currency
+Rotation=rpm
+Angle=degree
+FlowConductance=(kg/sec)/sqrt(kPa-kg/m3)
+FlowConductanceValve=Cv
+Basis=molar
+Potential=V
+Current=Amp
+Resistance=Ohm
+PetroMass=kg
+PowerTop=kJ
+HXDuty=kJ/hr
+Film=kW/m2-K
+RhoVV=kg/m/sec2
+ElecPower=MW
+Power=KW
+"ENDSLATE"
+
+// "SI" units-of-measure for HTRI. DEVIATIONS From Parent ONLY
+"BEGINSLATE"
+HTRISI
+Parent=SI
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+Time=sec
+FineTime=sec
+Temp=C
+Energy=kJ
+Foul=m2-K/W
+Htco=W/m2-K
+Power=MW
+Film=W/m2-K
+RhoVV=kg/m/sec2
+"ENDSLATE"
+
+// "English" units-of-measure for HEXTRAN. DEVIATIONS From Parent ONLY
+"BEGINSLATE"
+HXEnglish
+Parent=English
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+Area=ft2
+Density=lb/ft3
+StdLiqVol=ft3
+StdVapVol=ft3
+Mass=lb
+Time=hr
+FineTime=sec
+Temp=F
+Pres=psia
+Htco=BTU/hr-ft2-F
+Visc=CP
+Cond=BTU/hr-ft-F
+Surf=dyne
+Energy=BTU
+Power=HP
+PetroDensity=API
+Foul=ft2-hr-F/BTU
+Leng=ft
+Velocity=ft/sec
+FineLeng=in
+FineArea=in2
+Cp=BTU/lb-F
+TempDiff=F
+PresDiff=psi
+Film=BTU/hr-ft2-F
+RhoVV=lb/ft/sec2
+FineLengInverse=1/in
+"ENDSLATE"
+
+// "Metric" units-of-measure for HEXTRAN. DEVIATIONS From Parent ONLY
+"BEGINSLATE"
+HXMetric
+Parent=Metric
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+Area=m2
+Density=kg/m3
+StdLiqVol=m3
+StdVapVol=m3
+Mass=kg
+Time=hr
+FineTime=sec
+Temp=C
+Pres=kg/cm2
+Htco=kcal/hr-m2-C
+Visc=CP
+Cond=kcal/hr-m-C
+Surf=dyne
+Energy=kcal
+Power=kW
+PetroDensity=DENS
+Foul=m2-hr-C/kcal
+Leng=m
+Velocity=m/sec
+FineLeng=mm
+FineArea=mm2
+Cp=kcal/kg-C
+TempDiff=C
+PresDiff=kg/cm2
+Film=kcal/hr-m2-C
+RhoVV=kg/m/sec2
+FineLengInverse=1/m
+"ENDSLATE"
+
+// "SI" units-of-measure for HEXTRAN. DEVIATIONS ONLY
+"BEGINSLATE"
+HXSI
+Parent=SI
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+Area=m2
+Density=kg/m3
+StdLiqVol=m3
+StdVapVol=m3
+Mass=kg
+Time=hr
+FineTime=sec
+Temp=K
+Pres=kPa
+Htco=W/m2-K
+Visc=Pa-sec
+Cond=W/m-K
+Surf=N/m
+Energy=KJ
+Power=kW
+PetroDensity=DENS
+Foul=m2-K/W
+Leng=m
+Velocity=m/sec
+FineLeng=mm
+FineArea=mm2
+Cp=kJ/kg-K
+TempDiff=K
+PresDiff=kPa
+Film=W/m2-K
+RhoVV=kg/m/sec2
+FineLengInverse=1/m
+"ENDSLATE"
+
+//English units-of-measure for DynSim. DEVIATIONS ONLY
+"BEGINSLATE"
+DSEnglish
+Parent=English
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+Velocity=ft/sec
+Power=HP
+Freq=1/sec
+"ENDSLATE"
+
+//Metric units-of-measure for DynSim. DEVIATIONS ONLY
+"BEGINSLATE"
+DSMetric
+Parent=Metric
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+Velocity=m/sec
+Freq=1/sec
+"ENDSLATE"
+
+//SI units-of-measure for DynSim. DEVIATIONS ONLY
+"BEGINSLATE"
+DSSI
+Parent=SI
+isSystem=1
+isHidden=0
+allowDelete=0
+allowModify=0
+Velocity=m/sec
+Freq=1/sec
+"ENDSLATE"
+
+// Define "Internal" units-of-measure.
+"BEGINSLATE"
+Internal
+CopyFrom=S4MInternal
+isSystem=1
+isHidden=1
+allowDelete=0
+allowModify=0
+"ENDSLATE"
+
+// Define "Current" units-of-measure.
+"BEGINSLATE"
+Current
+Parent=SI
+isSystem=1
+isHidden=1
+allowDelete=0
+allowModify=1
+"ENDSLATE"
