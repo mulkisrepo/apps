@@ -2,22 +2,27 @@ function $(e){
 	return document.getElementById(e);
 }
 function init(){
-	for(var i=1;i<6;i++){
-		$('content').innerHTML += ' \
-		<div class="calArea"> \
-		<input id="exp'+i+'" class="exp" onkeyup="run('+i+');" autocomplete="off" placeholder="Enter expression"/>\
-		<input id="tag'+i+'" onkeyup="run('+i+');" class="tag" autocomplete="off" placeholder="ans'+i+'"/> \
-		<div id="ans'+i+'" class="ans" >&nbsp;</div>';
-	}
+	add();add();add();
 	t.r();
 	$("exp1").focus();	
+}
+function add(){
+	var id=1;
+	while ($('exp'+id)){id+=1;}
+	for(var o=document.getElementsByTagName("input"),i=0;i<o.length;i++)o[i].setAttribute('value',o[i].value);
+	$('content').innerHTML += ' \
+		<div class="calArea"> \
+		<input id="exp'+id+'" class="exp" onkeyup="run('+id+');" autocomplete="off" placeholder="Enter expression"/>\
+		<span onclick="this.parentNode.parentNode.removeChild( this.parentNode);" title="Remove this Block">X</span> \
+		<input id="tag'+id+'" onkeyup="run('+id+');" class="tag" autocomplete="off" placeholder="ans'+id+'"/> \
+		<div id="ans'+id+'" class="ans" >&nbsp;</div>';
 }
 function run(id){
 	try{
 		var exp=$('exp'+id).value;
-		for(var i=1;i<6;i++){
-			 var tag=$("tag"+i).value || "ans"+i;
-			 exp = exp.replace(new RegExp(tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),"g"),$("ans"+i).textContent.replace(tag+" = ",""));
+		for(var i=0;i<document.getElementsByClassName('tag').length;i++){
+			 var tag=document.getElementsByClassName('tag')[i].value || document.getElementsByClassName('tag')[i].placeholder;
+			 exp = exp.replace(new RegExp(tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),"g"),document.getElementsByClassName('tag')[i].nextElementSibling.textContent.replace(tag+" = ",""));
 		}
 		document.title="Calsci \u00A9 Karthik Narayana";//console.log(exp);
 		var matches = [];

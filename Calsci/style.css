@@ -18,6 +18,22 @@ body{
 	border: 1px solid #dadada;
 	box-shadow: 0px 1px 0px rgba(8, 22, 37, 0.02) inset, 0px 0px 2px rgba(8, 22, 37, 0.1) inset, 0px 1px 0px rgba(255, 255, 255, 0.2);
 }
+.calArea:hover  span{
+	display:block;
+}
+.calArea>span{
+		display:none;
+		cursor: pointer;
+		float:right;
+		margin-top:-58px;
+		margin-right:12px;
+		color:black;
+		font-size:14px;
+		position:relative;
+}
+.calArea>span:hover{
+		color:red;
+}
 .exp,.tag{
   margin:10px;
   background: transparent;
@@ -46,6 +62,7 @@ margin-top: -45px;
     color: transparent;
     text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
 }
+
 #template {
     position: absolute;
     top:2%;
@@ -105,6 +122,20 @@ margin-top: -45px;
 }
 #template ul div:hover {
 	color:red;
+}
+#add{
+	position: absolute;
+    top:2%;
+    left:10px;
+cursor: pointer;
+	 color:#666;
+   border: solid 1px #CCCCCC;
+   border-radius: 2px;
+  height:35px;
+  width:35px;
+  text-align: center;
+  line-height:35px;
+  padding-bottom:4px;
 }
 
 
