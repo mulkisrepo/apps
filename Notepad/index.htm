@@ -1,0 +1,19 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Notepad</title>
+        <script src="ckeditor\ckeditor.js"></script>
+    </head>
+    <body>
+        <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+               wake up Mulki...
+            </textarea>
+            <script>
+                CKEDITOR.replace( 'editor1',{customConfig: '' , stylesSet: false, on: {
+'instanceReady': function (evt) { evt.editor.execCommand('maximize'); }
+}});
+            </script>
+        </form>
+    </body>
+</html>
