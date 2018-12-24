@@ -3,16 +3,113 @@
         <meta charset="utf-8">
         <title>Notepad</title>
         <script src="ckeditor\ckeditor.js"></script>
+		<style>
+		#template {
+    position: absolute;
+    top:1%;
+    right:40px;
+    width:90px;
+    font: 12px Verdana, sans-serif;  
+	cursor: pointer;
+}
+#template:hover>div{
+   border-bottom: 0px;
+}
+#template>div{
+   position:relative;
+   padding: 8px;
+   color:#666;
+   width:100%;  
+   border: solid 1px #CCCCCC;
+   border-radius: 2px;
+   background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAGCAYAAAAPDoR2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABUSURBVBhXY/wPBAw4AGNVbcP/JUtXQLkIEBMdwcDw58+f/+nZBf9VtYzgGMQHiTOAjP3+/fv/oLBYsASIBvHB1oFJIHjz9t3/pLRsMA0DeBzEwAAAD6ZNULReW8AAAAAASUVORK5CYII=) no-repeat;
+    background-position: 90px center;
+	background-color:rgb(248, 248, 248);
+	z-index:10;
+}
+#template  ul {
+	position: absolute;
+    right:-17px;
+    width:250%;
+    text-align: center;
+    list-style:none;
+    background-color:rgb(248, 248, 248);    
+    margin:-1px;
+	padding-left:0px;
+    max-height:0;
+	overflow:hidden;
+}
+#template:hover ul{
+	border: solid 1px #CCCCCC; 
+	max-height: 500px;
+	transition: max-height 0.7s ease-in;
+}
+#template  li {
+	position:relative;
+    color:#888;
+    line-height:35px;
+}
+#template li:hover {
+	font-weight:bold;
+}
+#template li:hover div{
+	display:block;
+}
+#template ul div {
+	display:none;
+	position:absolute;
+	top:0;
+	right:12px;
+}
+#template ul div:hover {
+	color:red;
+}
+#title{
+	text-align:center;
+	font: 36px Verdana, sans-serif;  
+	font-weight: bold;
+
+	background-color: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+}
+		</style>
     </head>
     <body>
         <form>
+		<div id='title'>Notepad</div>
+		<div id="template"><div>TEMPLATES</div><ul></ul></div>
             <textarea name="editor1" id="editor1" rows="10" cols="80">
                wake up Mulki...
             </textarea>
             <script>
-                CKEDITOR.replace( 'editor1',{customConfig: '' , stylesSet: false, on: {
-'instanceReady': function (evt) { evt.editor.execCommand('maximize'); }
-}});
+                CKEDITOR.replace( 'editor1',{customConfig: '' , height: '65vh' , stylesSet: false});
+				function $(e){return document.getElementById(e);}
+				var cu=[],t = {
+        t: {},
+        c: function() {
+				var e = prompt("Call new template as ", $('title').textContent);			
+                e && "" != e && (t.t[e] ? confirm(e + " already exists, Overwrite?") && ($('title').innerHTML = e,t.t[e] = CKEDITOR.instances.editor1.getData(), this.s()) : ($('title').innerHTML = e,t.t[e] =  CKEDITOR.instances.editor1.getData(), this.s()))
+            
+        },
+        d: function(e) {console.log(e);
+            delete t.t[e], localStorage.setItem("NotepadTemplates", JSON.stringify(t.t)),t.r();
+			
+			},
+        l: function(e) {console.log('loadss');
+            $('title').innerHTML = e;CKEDITOR.instances.editor1.setData(t.t[e]);
+        },
+        r: function() {
+            t.t = JSON.parse(localStorage.getItem("NotepadTemplates")) || {}, $("template").children[1].innerHTML = '<li onclick="t.c();">Save As Template</li><li onclick="t.l(this.textContent.slice(0, -1))">' + Object.keys(t.t).sort().join('<div onclick="t.d(this.parentElement.textContent.slice(0, -1))" title="Remove this Template">X</div></li><li onclick="t.l(this.textContent.slice(0, -1))">') + '<div onclick="event.stopPropagation();t.d(this.parentElement.textContent.slice(0, -1));" title="Remove this Template">X</div></li>'
+        },
+        s: function() {
+            localStorage.setItem("NotepadTemplates", JSON.stringify(t.t)), t.r()
+        }
+    }
+	t.r();
             </script>
         </form>
     </body>
