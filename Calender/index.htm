@@ -1,0 +1,220 @@
+﻿<head>
+<title>Calendar</title>
+<style>
+
+body {
+	background: #444444;
+	font-family: 'Lucida Grande', Verdana, sans-serif;
+	-moz-user-select: none;
+}
+
+.year {
+	width:95%;
+	height:95%;	
+	margin-left:5%;
+}
+.year td {
+	vertical-align:top;
+}
+.year caption {
+	color: #e2e2e2;
+	line-height: 34px;
+	font-weight: bold;
+}
+.month {
+	font-size: 14px;
+	border-spacing: 0;
+}
+
+
+.month caption {
+	line-height: 25px;
+	background: rgba(0, 0, 0, 0.35);
+
+}
+.month th, td{
+  text-align: center;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.8);
+  padding: 0;
+}
+.month th:first-child, .month td:first-child {
+  border-left: 0;
+}
+.month th {
+  font-size: 8px;
+  text-transform: uppercase;
+  color: #696969;
+  line-height: 20px;
+  background: #f3f3f3;
+  border-left: 1px solid #f3f3f3;
+}
+.month td{
+	width:12.5%;
+}
+.month td {
+  font-size: 11px;
+  font-weight: bold;
+  border-top: 1px solid #c2c2c2;
+  border-left: 1px solid #c2c2c2;
+}
+.month td a {
+  display: block;
+  background: #b1ff00;
+  line-height: 28px;
+  width: 30px;
+  
+  box-shadow: inset 1px 1px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+.month td a[title=""]{
+	color: #666;
+	background-image: -moz-linear-gradient(top, #eaeaea 0%, #e5e5e5 60%, #d9d9d9 100%);
+	  box-shadow: inset 1px 1px rgba(255, 255, 255, 0.5);
+}
+.month td a:hover, .month td.off a {
+  background: #f3f3f3;
+}
+.month td.off a {
+  color: #b3b3b3;
+}
+.month td.wk a{
+  margin: -1px;
+  background: #b1ff00;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  
+  border: 1px solid #b1ff00;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.month td.wk a[title=""]{
+	color: #f3f3f3;
+	background: #357cc2;
+	border: 1px solid #326ca5;
+}
+.month td.active a, .month td a:active {
+  margin: -1px;
+  color: #f61616;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  background: #6dafbf;
+  border: 1px solid #598b94;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.month td.active a[title=""],.month td a[title=""]:active{
+	color: #f3f3f3;
+}
+.ld {
+	float: left;
+	cursor: pointer;
+	margin-left: 8%;
+}
+.td {
+	float: left;
+	margin-left: 35%;
+}
+.rd {
+	float: left;
+	cursor: pointer;
+	margin-left: 35%;
+}
+
+
+
+.tooltip {
+    transition: top 5.5s ease;
+    /*top:174px;*/
+    position: absolute;
+    background: #646464;
+    border-radius:4px;
+    padding: 6px 12px;
+    font-family: arial;
+    font-size: 12px;
+    text-shadow: 0px 1px 1px #000;
+    color: #ffc64a;
+  }
+
+  .tooltip:before {
+    content : " ";
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #646464;
+    position:absolute;
+    bottom:-5px;
+    left:5px;
+
+  }
+
+</style>
+	
+<script>
+	var yyyy;
+	function init(y){ 
+	 yyyy=y;
+	 var info=JSON.parse(localStorage.getItem('mulkisCalender')) || {};
+	 var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+	 var cal = '<table class="year"><caption><a onclick="init('+(y-1)+')" class="ld"><<</a><a class="td">'+y+'</a><a onclick="init('+(y+1)+')"  class="rd">>></a><caption>'; 
+	 for(i=0;i<3;i++){ //3 rows
+		cal += '<tr>';
+		for(j=0;j<4;j++){ //4 columns
+			var m=i*4+j; //current month
+			var mCal =  '<table class="month"><caption>'+months[m]+'</caption><thead><tr><th>Week</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr><tr></thead><tbody>';			
+			var d1 = new Date(y, m, 1-(new Date(y, m, 1).getDay()+6)%7);//start date (monday) for given month and year
+		    var d2 = new Date(y, m+1,1+(7-new Date(y, m+1, 1).getDay())%7);//end date (Sunday) for given month and year
+			while(d1<=d2){		
+				if(d1.getDay()==1){ //first Day of week
+					mCal += '<tr><td class="wk"><a id="'+y+'-'+getWeek(d1)+'" title = "'+(info[y+'-'+getWeek(d1)]||"")+'" onmouseover="getInfo(this)" onmouseout="hideInfo(this)" ondblclick="setInfo(this)">'+getWeek(d1)+'</a></td>';
+				}	
+				if(d1.toDateString()==new Date().toDateString()){ //check if todays date
+					mCal += '<td class="active">';
+				}else if(d1.getMonth()!=i*4+j){ // check if off month
+					mCal += '<td class="off">';
+				}else{
+					mCal += '<td>';
+				}		
+				mCal += '<a id="'+y+'-'+(d1.getMonth()+1)+'-'+d1.getDate()+'" title = "'+(info[y+'-'+(d1.getMonth()+1)+'-'+d1.getDate()]||"")+'" onmouseover="getInfo(this)" onmouseout="hideInfo(this)" ondblclick="setInfo(this)">'+d1.getDate()+'</a></td>';	
+				d1.setDate(d1.getDate()+1);				
+			}
+			mCal +='</tbody></table>';
+			cal += '<td>' + mCal + '</td>';
+		}
+		cal += '</tr>';
+	 }
+	 cal += '</table>';
+	 document.body.innerHTML=cal;
+	}
+	function getWeek(i){
+		var d = new Date(i);
+		d.setHours(0,0,0,0);
+		d.setDate(d.getDate()+4-(d.getDay()||7));
+		return Math.ceil((((d-new Date(d.getFullYear(),0,1))/8.64e7)+1)/7);
+	};
+	function getInfo(e){
+		if(e.title==""){
+			info=JSON.parse(localStorage.getItem('mulkisCalender')) || {};
+			e.title=info[e.id]||"";
+		}
+		
+	}
+	function setInfo(e){
+		var i=prompt("Info",e.title)
+		if(i!=null){
+				info[e.id]=i;
+				localStorage.setItem('mulkisCalender', JSON.stringify(info));
+				init(yyyy);
+		}
+	}
+	function hideInfo(evt){
+	//var ele=(evt || window.event);
+   // var title = ele.getAttribute("tooltip");
+   // ele.removeAttribute("tooltip");
+   // document.querySelector(".tooltip").remove();
+  }
+
+</script>
+</head>
+<body onload="init(new Date().getFullYear())">
+	
+</body>
+</html>
