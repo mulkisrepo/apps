@@ -5,8 +5,7 @@
  @media print
  {
    body {font-size:16px;}
- }
-
+sgts }
 
 body{
     background-color:#fbfbfb;
@@ -50,17 +49,20 @@ margin-top: -45px;
   font-size:28; 
   color:blue;
 }
+#title{
+
+	background-color: #666666;
+	-webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+}
 #title,#content{
 	text-align:center;
 	font: 36px Verdana, sans-serif;  
 	font-weight: bold;
 
-	background-color: #666666;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
 }
 
 #template {

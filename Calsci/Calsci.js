@@ -5,6 +5,15 @@ function init(){
 	add();add();add();
 	t.r();
 	$("exp1").focus();	
+	fetch('https://api.exchangeratesapi.io/latest?base=USD')
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(myJson) {
+		for (var key in myJson["rates"]){
+		 umc[key] = (1/obj[key]) + '' ;	 
+		}
+	});	
 }
 function add(){
 	var id=1;
