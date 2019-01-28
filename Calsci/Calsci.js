@@ -32,7 +32,7 @@ function run(id){
 		var exp=$('exp'+id).value;
 		for(var i=0;i<document.getElementsByClassName('tag').length;i++){
 			 var tag=document.getElementsByClassName('tag')[i].value || document.getElementsByClassName('tag')[i].placeholder;
-			 exp = exp.replace(new RegExp(tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),"g"),$('ans'+i).textContent.replace(tag+" = ",""));
+			 exp = exp.replace(new RegExp(tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),"g"),$('ans'+i+1).textContent.replace(tag+" = ",""));
 		}
 		document.title="Calsci \u00A9 Karthik Narayana";//console.log(exp);
 		var matches = [];
