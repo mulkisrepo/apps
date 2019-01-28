@@ -11,7 +11,8 @@ function init(){
 	})
 	.then(function(myJson) {
 		for (var key in myJson["rates"]){
-		 umc[key] = (1/obj[key]) + '' ;	 
+		 umc[key] = (1/obj[key]) + '' ;
+			console.log(key+'='+obj[key]);
 		}
 	});	
 }
