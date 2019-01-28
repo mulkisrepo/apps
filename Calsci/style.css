@@ -33,7 +33,7 @@ body{
 .calArea>span:hover{
 		color:red;
 }
-.exp,.tag{
+.exp,.tag,.desc{
   margin:10px;
   background: transparent;
   border: none;
