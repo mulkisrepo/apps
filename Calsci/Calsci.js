@@ -24,6 +24,7 @@ function add(){
 		<input id="exp'+id+'" class="exp" onkeyup="run('+id+');" autocomplete="off" placeholder="Enter expression"/>\
 		<span onclick="this.parentNode.parentNode.removeChild( this.parentNode);" title="Remove this Block">X</span> \
 		<input id="tag'+id+'" onkeyup="run('+id+');" class="tag" autocomplete="off" placeholder="ans'+id+'"/> \
+		<input class="tag desc" autocomplete="off" placeholder="Description"/> \
 		<div id="ans'+id+'" class="ans" >&nbsp;</div>';
 }
 function run(id){
