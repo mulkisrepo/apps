@@ -49,6 +49,12 @@ margin-top: -45px;
   font-size:28; 
   color:blue;
 }
+.desc{
+  font-size: 16px;
+  color: magenta;
+  margin-top: auto;
+  margin-bottom: 5px;
+}
 #title{
 
 	background-color: #666666;
