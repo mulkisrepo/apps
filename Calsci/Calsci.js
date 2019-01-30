@@ -28,6 +28,12 @@ function add(){
 		<div id="ans'+id+'" class="ans" >&nbsp;</div>';
 }
 function run(id){
+	calc(id);
+	for(var i=1;i<=document.getElementsByClassName('tag').length;i++){
+		if(i!=id && $('exp'+i).value!='' ){calc(i)};
+	}
+}
+function calc(id){
 	try{
 		var exp=$('exp'+id).value;
 		for(var i=0;i<document.getElementsByClassName('tag').length;i++){
