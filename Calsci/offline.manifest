@@ -1,7 +1,10 @@
 CACHE MANIFEST
 #This is a comment
 
-CACHE
+CACHE:
 index.html
 style.css
 Calsci.js
+
+FALLBACK:
+/ index.html
