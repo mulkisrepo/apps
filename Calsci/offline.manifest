@@ -5,6 +5,7 @@ CACHE:
 index.html
 style.css
 Calsci.js
+complete.ly.1.0.1.min.js
 
 FALLBACK:
 / index.html
