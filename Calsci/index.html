@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html manifest="offline.manifest">
+﻿<html manifest="offline.manifest">
 <title>Calsci © Karthik Narayana</title>
 <link rel="stylesheet" href="style.css">
 <script src="Calsci.js"></script>
-<body onload="init();">
-<div id='Add' title="Add Calculation Block" onclick='add();'>+</div>
-<div id='content'><div id='title'>Calsci</div></div>
+<script src='complete.ly.1.0.1.min.js'></script>
+<body onload="Calsci.init();">
+<div id='Add' title="Add Calculation Block" onclick='Calsci.add();'>+</div>
+<div id='title'>Calsci</div>
+<div id='content' class="draggable-list"></div>
 <div id="template"><div>TEMPLATES</div><ul></ul></div>
 </body>
-</html>

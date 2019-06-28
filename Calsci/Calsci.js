@@ -1,93 +1,265 @@
 function $(e){
 	return document.getElementById(e);
 }
-function init(){
-	add();add();add();
-	t.r();
-	$("exp1").focus();	
-	fetch('https://api.exchangeratesapi.io/latest?base=USD')
-	.then(function(response) {
-		return response.json();
-	})
-	.then(function(myJson) {
-		for (var key in myJson["rates"]){
-		 umc[key] = (1/myJson["rates"][key]) + '' ;
-		}
-	});	
+function _(n,e){
+	if(typeof e === "undefined") {e=document;}
+	return e.getElementsByClassName(n);
 }
-function add(){
-	var id=1;
-	while ($('exp'+id)){id+=1;}
-	for(var o=document.getElementsByTagName("input"),i=0;i<o.length;i++)o[i].setAttribute('value',o[i].value);
-	$('content').innerHTML += ' \
-		<div class="calArea"> \
-		<input id="exp'+id+'" class="exp" onkeyup="run('+id+');" autocomplete="off" placeholder="Enter expression"/>\
-		<span onclick="this.parentNode.parentNode.removeChild( this.parentNode);" title="Remove this Block">X</span> \
-		<input id="tag'+id+'" onkeyup="run('+id+');" class="tag" autocomplete="off" placeholder="ans'+id+'"/> \
+var Calsci={
+	init:function(){
+		this.drag = new dragManager($('content'));
+		this.add();this.add();this.add();
+		t.r();
+	},
+	add:function(calArea){
+		var b,d,e,a,ec;
+		if(typeof calArea === "undefined") {
+			calArea = document.createElement('div');
+			calArea.className = "calArea";
+			$('content').appendChild(calArea);
+		}else{
+			b=true;
+			d=_('desc',calArea)[0].value;
+			e=_('exp',calArea)[0].value;
+			a=_('ans',calArea)[0].innerHTML;
+			ec=_('ec',calArea)[0].innerHTML;
+		}
+		calArea.innerHTML = ' \
 		<input class="desc" autocomplete="off" placeholder="Description"/> \
-		<div id="ans'+id+'" class="ans" >&nbsp;</div>';
-}
-function run(id){
-	calc(id);
-	for(var i=1;i<=document.getElementsByClassName('tag').length;i++){
-		if(i!=id && $('exp'+i).value!='' ){calc(i)};
-	}
-}
-function calc(id){
-	try{
-		var exp=$('exp'+id).value;
-		for(var i=0;i<document.getElementsByClassName('tag').length;i++){
-			 var tag=document.getElementsByClassName('tag')[i].value || document.getElementsByClassName('tag')[i].placeholder;
-			 exp = exp.replace(new RegExp(tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),"g"),$('ans'+(i+1)).textContent.replace(tag+" = ",""));
+		<span class="ec" onclick="ec=window.getComputedStyle(this.nextElementSibling.nextElementSibling)[\'display\'];this.title=(ec==\'none\'?\'Collapse\':\'Expand\')+\' this Block\';this.innerHTML=(ec==\'none\'?\'▲\':\'▼\');this.parentNode.setAttribute(\'vfx\',(ec==\'none\'?\'\':\(_(\'desc\',this.parentNode)[0].value==\'\'?\'grayed\':\'output\')));" title="Collapse this Block">▲</span> \
+		<span onclick="this.parentNode.parentNode.removeChild( this.parentNode);Calsci.drag.reload();" title="Remove this Block">X</span>';//<hr style="margin:0;height:4px;border:none;background-color:#dbdbdb;">\
+		
+		var cmp = completely(calArea, {
+			fontSize : '24px',
+			fontFamily : 'Verdana',
+			color:'#333',
+		});  
+		cmp.onChange = function (text) {
+		if (text != ''){
+			cmp.startFrom = (text.lastIndexOf('[')>text.lastIndexOf('>')?text.lastIndexOf('[')+1:text.lastIndexOf('>')+1);
+			cmp.repaint();
+			Calsci.calc(text,cmp.input.parentNode.nextElementSibling);
+			Calsci.reCalc();
+			}
+		};
+		cmp.options = Object.keys(umc);
+		cmp.input.placeholder="Expression"
+		cmp.input.className = "exp";
+		cmp.input.name = "txtExp";
+		cmp.input.addEventListener('keyup', function (e) {
+		if(e.keyCode==13){
+			if(cmp.input.parentNode.parentNode.nextElementSibling){
+				_('exp',cmp.input.parentNode.parentNode.nextElementSibling)[0].focus();
+			}else{
+				_('exp')[0].focus();
+			}
+		};
+		}, false);
+		cmp.input.style= "position:relative;display:block;"
+		cmp.hint.className = "hint";
+		cmp.hint.name = "txtHint";
+		cmp.hint.disabled = true;
+		cmp.hint.style= "position:absolute;color:gray;" 
+		var ans = document.createElement('div');
+		ans.className= "ans";
+		ans.innerHTML=" .";
+		calArea.appendChild(ans);
+		if(b){
+			_('desc',calArea)[0].value=d;
+			_('exp',calArea)[0].value=e;
+			_('ans',calArea)[0].innerHTML=a;
+			_('ec',calArea)[0].innerHTML=ec;
 		}
-		document.title="Calsci \u00A9 Karthik Narayana";//console.log(exp);
-		var matches = [];
-		exp.replace(/(?![^0-9])[0-9]+(\.[0-9]+)?\[(.*?)\]/g, function(g0,g1){matches.push(g0);});
-		if(matches.length>0){
-			for(var i=0;i<matches.length;i++){	
-				var val = matches[i].split("[")[0];
-				var uom = matches[i].split("[")[1].replace("]","");
-				if(uom.split(">").length==2){
-					var fmc = umc[uom.split(">")[0]];
-					if (!fmc){throw {message:"Unit " + uom.split(">")[0] + " not supported"};}
-					var tmc = umc[uom.split(">")[1]];
-					if (!tmc){throw {message:"Unit " + uom.split(">")[1] + " not supported"};}
-					var fac = fmc.split('/')[1]||0;
-					var fmc = fmc.split('/')[0];
-					var tac = tmc.split('/')[1]||0;
-					var tmc = tmc.split('/')[0];
-					var uc = (val*1+fac*1)*fmc/tmc-tac;
-					exp = exp.replace(matches[i],"1*("+uc+")");
-				}else{
-					throw {message:"Syntax Error. Eg: [in>mm]"};
+		this.drag.reload();
+	},
+	getData:function(){
+		for(var o=document.getElementsByTagName("input"),i=0;i<o.length;i++)o[i].setAttribute('value',o[i].value);
+		return $('content').innerHTML;
+	},
+	setData: function(t,c){
+		$('title').innerHTML = t;
+		$('content').innerHTML= c;
+		for(var i=0;i<_('calArea').length;i++){this.add(_('calArea')[i]);}
+		this.reCalc();this.reCalc();
+	},
+	reCalc:function(){
+		for(var i=0;i<_('exp').length;i++){
+			this.calc(_('exp')[i].value,_('exp')[i].parentNode.nextElementSibling);
+		}
+	},
+	calc:function(exp,elem){
+		try{
+			document.title="Calsci \u00A9 Karthik Narayana";
+			var matches = [];
+			exp.replace(/(?![^\w])[\w]+(\.[\w]+)?\[(.*?)\]/g, function(g0,g1){matches.push(g0);});
+			if(matches.length>0){
+				for(var i=0;i<matches.length;i++){	
+					var val = matches[i].split("[")[0];
+					if(window[val]){
+						val=window[val];		
+					}else{
+						if(isNaN(val)){throw {message: val + " is not defined"};}
+					}
+					var uom = matches[i].split("[")[1].replace("]","");
+					if(uom.split(">").length==2){
+						var fmc = umc[uom.split(">")[0]];
+						if (!fmc){throw {message:"Unit " + uom.split(">")[0] + " not supported"};}
+						var tmc = umc[uom.split(">")[1]];
+						if (!tmc){throw {message:"Unit " + uom.split(">")[1] + " not supported"};}
+						var fac = fmc.split('/')[1]||0;
+						var fmc = fmc.split('/')[0];
+						var tac = tmc.split('/')[1]||0;
+						var tmc = tmc.split('/')[0];
+						var uc = (val*1+fac*1)*fmc/tmc-tac;
+						exp = exp.replace(matches[i],"1*("+uc+")");
+					}else{
+						throw {message:"Syntax Error. Eg: [in>mm]"};
+					}
 				}
 			}
+			var val=eval(exp);
+			elem.innerHTML=(val==0?0:val || '&nbsp;'); 
+			elem.setAttribute('vfx','');
+		}catch(e){
+			elem.innerHTML="Error: "+ e.message || '&nbsp;';
+			elem.setAttribute('vfx','Error');
 		}
-		var val=eval(exp);
-		$("ans"+id).innerHTML=($("tag"+id).value || "ans"+id) +" = "+ val || '&nbsp;';
-		$("ans"+id).style.color="#060";
-	}catch(e){
-		$("ans"+id).innerHTML="Error: "+ e.message || '&nbsp;';
-		$("ans"+id).style.color="#c00";
 	}
 }
- var cu=[],t = {
+function dragManager(list) {
+  var draggableList,
+  draggableItemOffsets = [],
+  draggingItem,
+  draggingItemClone,
+  lastListItem = false,
+  dragging = false;
+ 
+  document.addEventListener('mousedown', onMouseDown);
+  document.addEventListener('mouseup', onMouseUp);
+  document.addEventListener('mousemove', onMouseMove);
+  this.list = list;
+  this.reload = function () {
+    draggableList = this.list;
+    for (i = 0; i < draggableList.children.length; i++) {
+      var draggableListItem = draggableList.children[i];
+      draggableItemOffsets[i] = [getElementY(draggableListItem), getElementY(draggableListItem) + draggableListItem.offsetHeight];
+  }
+  };
+
+  function onMouseDown(event) {
+    event = event || window.event;
+    var element = event.target || event.srcElement;
+    if (isDraggableListItem(element)) {
+      draggingItem = element;
+      draggingItemClone = draggingItem.cloneNode(true);
+
+      draggingItem.style.opacity = 0;
+
+      draggingItemClone.classList.toggle('dragging');
+      draggingItemClone.style.width = computedStyle(draggingItem).width;
+     draggingItemClone.style.top = event.clientY - Math.floor(draggingItem.clientHeight / 2) + 'px';
+
+      draggableList.appendChild(draggingItemClone);
+
+      dragging = true;
+      window.requestAnimationFrame(update);
+      document.body.style.cursor = 'ns-resize';
+    }
+  };
+
+  function onMouseUp() {
+    if (dragging) {
+      dragging = false;
+      document.body.style.cursor = null;
+      draggableList.removeChild(draggingItemClone);
+      draggingItem.style.opacity = null;
+    }
+  };
+
+  var currentY = 0;
+
+  function onMouseMove(event) {
+    event = event || window.event;
+    currentY = event.clientY;
+  };
+
+  function update() {
+    if (dragging) {
+      window.requestAnimationFrame(update);
+    }
+    draggingItemClone.style.top = currentY - draggingItem.clientHeight / 2 + 'px';
+
+    var cursorY = currentY + window.scrollY,
+    dropListItem;
+
+    for (i = 0; i < draggableItemOffsets.length; i++) {
+      if (cursorY > draggableItemOffsets[i][0] && cursorY < draggableItemOffsets[i][1]) {
+        lastListItem = i === draggableItemOffsets.length - 1;
+        dropListItem = draggableList.children[i];
+        break;
+      } else {
+        dropListItem = null;
+      }
+    }
+
+    if (dropListItem !== null && dropListItem !== draggingItem) {
+      if (!lastListItem) {
+        draggableList.insertBefore(draggingItem, dropListItem);
+      } else {
+        draggableList.appendChild(draggingItem);
+      }
+    }
+	
+  }
+
+  function getElementY(element) {
+    var y = 0;
+    while (element.offsetParent) {
+      y += element.offsetTop;
+      element = element.offsetParent;
+    }
+    y += element.offsetTop;
+    return y;
+  }
+
+  function isDraggableListItem(element) {
+    return element.className !== 'dragging' && element.parentNode === draggableList;
+  }
+
+  function computedStyle(element) {
+    return window.getComputedStyle(element) || element.currentStyle;
+  }
+
+  this.reload();
+}
+var ac=[],cu=[],t = {
         t: {},
         c: function() {
-				for(var o=document.getElementsByTagName("input"),i=0;i<o.length;i++)o[i].setAttribute('value',o[i].value);
-                var e = prompt("Call new template as ", $('title').textContent);			
-                e && "" != e && (t.t[e] ? confirm(e + " already exists, Overwrite?") && ($('title').innerHTML = e,t.t[e] = $('content').innerHTML, this.s()) : ($('title').innerHTML = e,t.t[e] =  $('content').innerHTML, this.s()))
-            
+                var e = prompt("Call new template as ", $('title').textContent);				
+                e && "" != e && (t.t[e] ? confirm(e + " already exists, Overwrite?") && ($('title').innerHTML = e,t.t[e] = Calsci.getData(), this.s()) : ($('title').innerHTML = e,t.t[e] =  Calsci.getData(), this.s()))        
         },
-        d: function(e) {console.log(e);
-            delete t.t[e], localStorage.setItem("CalsciTemplates", JSON.stringify(t.t)),t.r();
-			
-			},
-        l: function(e) {console.log('loadss');
-            $('content').innerHTML = t.t[e];
+		c1: function() {
+			var i,e = prompt("Paste copied template");	
+			e && "" != e && (i=e.split("``")) && (t.t[i[0]] ? confirm(i[0] + " already exists, Overwrite?") && ($('title').innerHTML = i[0],t.t[i[0]] = i[1], this.s()) : ($('title').innerHTML = i[0],t.t[i[0]] = i[1], this.s()))   				
+        },
+		c2: function(e) {
+			var a = document.createElement("textarea");
+			a.value = e+"``"+t.t[e];
+			document.body.appendChild(a);
+			a.focus();
+			a.select();
+			document.execCommand('copy');
+			document.body.removeChild(a);
+			alert(e +' Template Copied to Clipboard!');			
+        },
+        d: function(e) {//console.log(e);
+            delete t.t[e], localStorage.setItem("CalsciTemplates", JSON.stringify(t.t)),t.r();	
+		},
+        l: function(e) {//console.log('loading template '+ t.t[e]);
+			Calsci.setData(e,t.t[e]);
         },
         r: function() {
-            t.t = JSON.parse(localStorage.getItem("CalsciTemplates")) || {}, $("template").children[1].innerHTML = '<li onclick="t.c();">Save As Template</li><li onclick="t.l(this.textContent.slice(0, -1))">' + Object.keys(t.t).sort().join('<div onclick="t.d(this.parentElement.textContent.slice(0, -1))" title="Remove this Template">X</div></li><li onclick="t.l(this.textContent.slice(0, -1))">') + '<div onclick="event.stopPropagation();t.d(this.parentElement.textContent.slice(0, -1));" title="Remove this Template">X</div></li>'
+            t.t = JSON.parse(localStorage.getItem("CalsciTemplates")) || {}, $("template").children[1].innerHTML = '<li onclick="t.c();">Save As Template<div onclick="event.stopPropagation();t.c1();" title="Paste Copied Template">&#9113;</div></li><li onclick="t.l(this.textContent.slice(0, -2))">' + Object.keys(t.t).sort().join('<div onclick="t.d(this.parentElement.textContent.slice(0, -2))" title="Remove this Template">X</div><div onclick="t.c2(this.parentElement.textContent.slice(0, -2))" title="Copy this Template">&#10697;</div></li><li onclick="t.l(this.textContent.slice(0, -2))">') + '<div onclick="event.stopPropagation();t.d(this.parentElement.textContent.slice(0, -2));" title="Remove this Template">X</div><div onclick="t.c2(this.parentElement.textContent.slice(0, -2))" title="Copy this Template">&#10697;</div></li>'
         },
         s: function() {
             localStorage.setItem("CalsciTemplates", JSON.stringify(t.t)), t.r()
