@@ -20,6 +20,7 @@ this.addEventListener('install', event => {
 this.addEventListener('fetch', event => {
   // request.mode = navigate isn't supported in all browsers
   // so include a check for Accept: text/html header.
+  console.log('***************----->'+event.request);
   if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
         event.respondWith(
           fetch(event.request.url).catch(error => {
