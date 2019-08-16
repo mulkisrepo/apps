@@ -1,0 +1,23 @@
+﻿<html>
+<title>Calsci © Karthik Narayana</title>
+<link rel="stylesheet" href="style.css">
+<script src="Calsci.js"></script>
+<script src='complete.ly.1.0.1.min.js'></script>
+<body onload="Calsci.init();">
+<div id='Add' title="Add Calculation Block" onclick='Calsci.add();'>+</div>
+<div id='title'>Calsci</div>
+<div id='content' class="draggable-list"></div>
+<div id="template"><div>TEMPLATES</div><ul></ul></div>
+	<script>
+		// Register the service worker
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
+		    // Registration was successful
+		    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}).catch(function(err) {
+		    // registration failed :(
+		    	console.log('ServiceWorker registration failed: ', err);
+		    });
+		}
+	</script>
+</body>
