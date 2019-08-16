@@ -8,4 +8,7 @@
 <div id='title'>Calsci</div>
 <div id='content' class="draggable-list"></div>
 <div id="template"><div>TEMPLATES</div><ul></ul></div>
+<script>
+"serviceWorker"in navigator&&navigator.serviceWorker.register("./offline.js").then(function(e){console.log("ServiceWorker registration successful with scope: ",e.scope)}).catch(function(e){console.log("ServiceWorker registration failed: ",e)});
+</script>
 </body>
