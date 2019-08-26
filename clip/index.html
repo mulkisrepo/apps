@@ -1,1 +1,15 @@
-Hello
+<script>
+function run(){
+var xhr = new XMLHttpRequest();
+var url = "https://api.myjson.com/bins/ococococ";
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader('Access-Control-Allow-Origin','*');
+var data = JSON.stringify({"hello": "worldms"});
+xhr.send(data);
+}
+</script>
+<textarea id="data" rows="5" cols="40"></textarea>
+<br />
+<input id="clickMe" type="button" value="GET Example" />
+
