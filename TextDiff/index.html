@@ -1,1 +1,123 @@
+﻿<html>
+<head>
+<title>TextDiff © Karthik Narayana</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" type="text/css" href="result-light.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="codemirror.js"></script>
+<script type="text/javascript" src="mergely.js"></script>
+<link rel="stylesheet" type="text/css" href="codemirror.css">
+<link rel="stylesheet" type="text/css" href="mergely.css">
+<style id="compiled-css" type="text/css">
+      h1, ul {
+  margin: .3em 0;
+}
 
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0 .5em;
+}
+
+.diffs {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.diffs header * {
+  display: inline-block;
+  vertical-align: middle;
+}
+.diffs .compare-wrapper {
+  flex: 1 1 auto;
+  position: relative;
+}
+.diffs .compare-wrapper #compare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Auto-height fix */
+.mergely-column .CodeMirror {
+  height: 100%;
+}
+
+</style>
+<style type="text/css">#compare .CodeMirror-gutter-text { padding: 5px 0 0 0; }#compare .CodeMirror-lines pre, #compare .CodeMirror-gutter-text pre { line-height: 18px; }.CodeMirror-linewidget { overflow: hidden; };compare .CodeMirror-scroll { height: 100%; overflow: auto; }
+.CodeMirror { line-height: 18px; }</style>
+<script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      
+var comp = $('#compare');
+
+function downloadJSON(url, callback) {
+  $.get(url, function(data) {
+    var json = JSON.parse(data);
+    var formattedText = JSON.stringify(json, null, 2);
+    callback(formattedText);
+  });
+}
+
+comp.mergely({
+  cmsettings: {
+    readOnly: false,
+    lineWrapping: true
+  },
+  wrap_lines: true,
+
+  //Doesn't do anything?
+  //autoresize: true,
+
+  editor_width: 'calc(50% - 25px)',
+  editor_height: '100%',
+
+  lhs: function(setValue) {
+    downloadJSON($("#file1").attr('href'), setValue);
+  },
+  rhs: function(setValue) {
+    downloadJSON($("#file2").attr('href'), setValue);
+  }
+});
+
+function changeOptions(changer) {
+  var options = comp.mergely('options');
+  changer(options);
+
+  comp.mergely('options', options);
+  //comp.mergely('update');
+}
+
+$('#prev').click(function() { comp.mergely('scrollToDiff', 'prev'); });
+$('#next').click(function() { comp.mergely('scrollToDiff', 'next'); });
+$('#wrap').click(function() { changeOptions(function(x) { x.wrap_lines = !x.wrap_lines; }); });
+
+
+    }
+
+  //]]></script>
+</head>
+<body>
+<div class="container">
+
+    <div class="diffs">
+        <header>
+            <h1>Text Diff</h1>
+            <button id="prev" title="Previous diff">▲</button>
+            <button id="next" title="Next diff">▼</button>
+            <button id="wrap" title="Toggle line wrapping">Ln
+            </button>
+        </header>
+        <div class="compare-wrapper">
+            <div id="compare">
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
