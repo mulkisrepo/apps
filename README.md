@@ -1,13 +1,13 @@
 # Mulki's Apps
 
-Calsci - Scientific Calculator with Engineering Unit Conversion
-https://mulkisrepo.github.io/apps/Calsci/
-
-
-360 Degree Photo Viewer
-https://mulkisrepo.github.io/apps/360/
-
-
+Calsci - Scientific Calculator with Engineering Unit Conversion\
+https://mulkisrepo.github.io/apps/Calsci/\
+\
+\
+360 Degree Photo Viewer\
+https://mulkisrepo.github.io/apps/360/\
+\
+\
 Week Number Calendar - Add todo for days or weeks
 https://mulkisrepo.github.io/apps/Calender/
 
