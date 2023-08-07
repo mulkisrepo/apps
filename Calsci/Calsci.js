@@ -117,7 +117,7 @@ var Calsci={
 					}
 				}
 			}
-			var val=eval(exp);
+			var val=eval(exp.replaceAll(',',''));
 			elem.innerHTML=(val==0?0:val || '&nbsp;'); 
 			elem.setAttribute('vfx','');
 		}catch(e){
